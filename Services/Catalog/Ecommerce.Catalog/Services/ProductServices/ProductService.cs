@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Ecommerce.Catalog.Dtos.productDtos;
 using Ecommerce.Catalog.Dtos.ProductDtos;
 using Ecommerce.Catalog.Entities;
 using Ecommerce.Catalog.Settings;

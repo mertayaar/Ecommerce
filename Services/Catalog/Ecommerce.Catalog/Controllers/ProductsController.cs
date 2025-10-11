@@ -52,4 +52,4 @@ namespace Ecommerce.Catalog.Controllers
         }
     }
 }
-}
+
