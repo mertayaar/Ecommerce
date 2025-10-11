@@ -8,7 +8,10 @@
 
   <ItemGroup>
     <Folder Include="Features\CQRS\Commands\OrderingCommands\" />
-    <Folder Include="Features\Mediator\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="13.0.0" />
   </ItemGroup>
 
   <ItemGroup>
