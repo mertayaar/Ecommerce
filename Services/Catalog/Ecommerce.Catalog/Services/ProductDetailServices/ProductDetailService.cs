@@ -10,7 +10,7 @@ namespace Ecommerce.Catalog.Services.ProductDetailServices
     {
         private readonly IMapper _mapper;
 
-        public ProductDetailService(IMapper mapper, IDatabaseSettings _databaseSettings)
+        public ProductDetailService(IMapper mapper, IdatabaseSettings _databaseSettings)
         {
             var client = new MongoClient(_databaseSettings.ConnectionString);
             var database = client.GetDatabase(_databaseSettings.DatabaseName);
@@ -28,7 +28,7 @@ namespace Ecommerce.Catalog.Services.ProductDetailServices
 
         public async Task DeleteProductDetailAsync(string id)
         {
-            await _ProductDetailCollection.DeleteOneAsync(x => x.ProductDetailID == id);
+            await _ProductDetailCollection.DeleteOneAsync(x => x.ProductDetailId == id);
         }
 
         public async Task<List<ResultProductDetailDto>> GetAllProductDetailAsync()
@@ -37,16 +37,16 @@ namespace Ecommerce.Catalog.Services.ProductDetailServices
             return _mapper.Map<List<ResultProductDetailDto>>(values);
         }
 
-        public async Task<GetByIDProductDetailDto> GetByIDProductDetailAsync(string id)
+        public async Task<GetByIdProductDetailDto> GetByIdProductDetailAsync(string id)
         {
-            var values = await _ProductDetailCollection.Find<ProductDetail>(x => x.ProductDetailID == id).FirstOrDefaultAsync();
-            return _mapper.Map<GetByIDProductDetailDto>(values);
+            var values = await _ProductDetailCollection.Find<ProductDetail>(x => x.ProductDetailId == id).FirstOrDefaultAsync();
+            return _mapper.Map<GetByIdProductDetailDto>(values);
         }
 
         public async Task UpdateProductDetailAsync(UpdateProductDetailDto updateProductDetailDto)
         {
             var values = _mapper.Map<ProductDetail>(updateProductDetailDto);
-            await _ProductDetailCollection.FindOneAndReplaceAsync(x => x.ProductDetailID == updateProductDetailDto.ProductDetailID, values);
+            await _ProductDetailCollection.FindOneAndReplaceAsync(x => x.ProductDetailId == updateProductDetailDto.ProductDetailId, values);
         }
     }
 }

@@ -24,11 +24,11 @@ namespace Ecommerce.Discount.Migrations
 
             modelBuilder.Entity("Ecommerce.Discount.Entities.Coupon", b =>
                 {
-                    b.Property<int>("CouponID")
+                    b.Property<int>("CouponId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CouponID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CouponId"));
 
                     b.Property<string>("CouponCode")
                         .IsRequired()
@@ -43,7 +43,7 @@ namespace Ecommerce.Discount.Migrations
                     b.Property<DateTime>("ValidDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("CouponID");
+                    b.HasKey("CouponId");
 
                     b.ToTable("Coupons");
                 });

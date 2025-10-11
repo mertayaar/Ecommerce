@@ -15,7 +15,7 @@ namespace Ecommerce.Discount.Migrations
                 name: "Coupons",
                 columns: table => new
                 {
-                    CouponID = table.Column<int>(type: "int", nullable: false)
+                    CouponId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CouponCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CouponRate = table.Column<int>(type: "int", nullable: false),
@@ -24,7 +24,7 @@ namespace Ecommerce.Discount.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Coupons", x => x.CouponID);
+                    table.PrimaryKey("PK_Coupons", x => x.CouponId);
                 });
         }
 

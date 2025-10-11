@@ -1,8 +1,8 @@
 ﻿namespace Ecommerce.Catalog.Dtos.CategoryDtos
 {
-    public class GetByIDCategoryDto
+    public class GetByIdCategoryDto
     {
-        public string CategoryID { get; set; }
+        public string CategoryId { get; set; }
         public string CategoryName { get; set; }
     }
 }

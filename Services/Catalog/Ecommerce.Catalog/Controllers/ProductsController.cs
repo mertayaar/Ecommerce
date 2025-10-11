@@ -24,9 +24,9 @@ namespace Ecommerce.Catalog.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProductByID(string id)
+        public async Task<IActionResult> GetProductById(string id)
         {
-            var value = await _ProductService.GetByIDProductAsync(id);
+            var value = await _ProductService.GetByIdProductAsync(id);
             return Ok(value);
         }
 

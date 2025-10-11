@@ -17,7 +17,7 @@ out/
 
 # Visual Studio
 .vs/
-.idea/
+.Idea/
 *.dbmdl
 *.bak
 *.backup
@@ -45,8 +45,8 @@ wwwroot/build/
 # macOS
 .DS_Store
 
-# JetBrains Rider
-.idea/
+# JetBrains RIder
+.Idea/
 
 # Node modules (if you have React/Angular frontend)
 node_modules/
@@ -75,7 +75,7 @@ appsettings.Test.json
 appsettings.json
 
 # Docker
-docker-compose.override.yml
+docker-compose.overrIde.yml
 .docker/
 Dockerfile.*
 

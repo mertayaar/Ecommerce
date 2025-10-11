@@ -1,6 +1,6 @@
 ﻿namespace Ecommerce.Catalog.Settings
 {
-    public class DatabaseSettings : IDatabaseSettings
+    public class DatabaseSettings : IdatabaseSettings
     {
         public string CategoryCollectionName { get; set; }
         public string ProductCollectionName { get; set; }

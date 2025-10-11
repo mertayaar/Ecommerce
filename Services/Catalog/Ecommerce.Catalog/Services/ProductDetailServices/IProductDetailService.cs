@@ -9,6 +9,6 @@ namespace Ecommerce.Catalog.Services.ProductDetailServices
         Task UpdateProductDetailAsync(UpdateProductDetailDto updateProductDetailDto);
         Task DeleteProductDetailAsync(string id);
 
-        Task<GetByIDProductDetailDto> GetByIDProductDetailAsync(string id);
+        Task<GetByIdProductDetailDto> GetByIdProductDetailAsync(string id);
     }
 }

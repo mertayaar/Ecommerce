@@ -2,7 +2,7 @@
 {
     public class ResultDiscountCouponDto
     {
-        public int CouponID { get; set; }
+        public int CouponId { get; set; }
         public string CouponCode { get; set; }
         public int CouponRate { get; set; }
         public bool IsActive { get; set; }
