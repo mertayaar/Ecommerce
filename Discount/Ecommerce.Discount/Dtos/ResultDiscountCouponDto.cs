@@ -1,6 +1,6 @@
 ﻿namespace Ecommerce.Discount.Dtos
 {
-    public class GetByIDCouponDto
+    public class ResultDiscountCouponDto
     {
         public int CouponID { get; set; }
         public string CouponCode { get; set; }

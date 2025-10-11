@@ -13,7 +13,7 @@ namespace Ecommerce.Discount.Services
             _context = context;
         }
 
-        public async Task CreateCouponAsync(CreateCouponDto createCouponDto)
+        public async Task CreateCouponAsync(CreateDiscountCouponDto createCouponDto)
         {
             string query = "insert into Coupons (CouponCode,CouponRate,IsActive,ValidDate) values (@couponCode,@couponRate,@isActive,@validDate)";
             var parameters = new DynamicParameters();
@@ -38,29 +38,29 @@ namespace Ecommerce.Discount.Services
             }
         }
 
-        public async Task<List<ResultCouponDto>> GetAllCouponAsync()
+        public async Task<List<ResultDiscountCouponDto>> GetAllCouponAsync()
         {
             string query = "select * from Coupons";
             using (var connection = _context.CreateConnection())
             {
-                var values = await connection.QueryAsync<ResultCouponDto>(query);
+                var values = await connection.QueryAsync<ResultDiscountCouponDto>(query);
                 return values.ToList();
             }
         }
 
-        public async Task<GetByIDCouponDto> GetByIDCouponAsync(int id)
+        public async Task<GetByIDDiscountCouponDto> GetByIDCouponAsync(int id)
         {
             string query = "select * from Coupons where CouponID=@couponID";
             var parameters = new DynamicParameters();
             parameters.Add("@couponID", id);
             using(var connection = _context.CreateConnection())
             {
-                var values = await connection.QueryFirstOrDefaultAsync<GetByIDCouponDto>(query);
+                var values = await connection.QueryFirstOrDefaultAsync<GetByIDDiscountCouponDto>(query);
                 return values;
             }
         }
 
-        public async Task UpdateCouponAsync(UpdateCouponDto updateCouponDto)
+        public async Task UpdateCouponAsync(UpdateDiscountCouponDto updateCouponDto)
         {
             string query = "Update Coupons Set CouponCode=@couponCode,CouponRate=@couponRate,IsActive=@isActive,ValidDate=@validDate where CouponID=@couponID";
             var parameters = new DynamicParameters();
