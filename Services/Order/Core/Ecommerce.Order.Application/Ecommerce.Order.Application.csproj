@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Features\CQRS\Commands\OrderingCommands\" />
-    <Folder Include="Features\CQRS\Commands\OrderDetailCommands\" />
     <Folder Include="Features\Mediator\" />
   </ItemGroup>
 
