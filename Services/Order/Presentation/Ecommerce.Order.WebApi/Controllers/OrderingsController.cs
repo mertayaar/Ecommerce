@@ -34,7 +34,7 @@ namespace Ecommerce.Order.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateOrdering(CreateOrderDetailCommand command)
+        public async Task<IActionResult> CreateOrdering(CreateOrderingCommand command)
         {
             await _mediator.Send(command);
             return Ok();
@@ -43,7 +43,7 @@ namespace Ecommerce.Order.WebApi.Controllers
         [HttpDelete]
         public async Task<IActionResult> RemoveOrdering(int id)
         {
-            await _mediator.Send(new RemoveOrderDetailCommand(id));
+            await _mediator.Send(new RemoveOrderingCommand(id));
             return Ok();
         }
 

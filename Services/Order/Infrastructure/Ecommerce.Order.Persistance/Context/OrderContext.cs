@@ -12,7 +12,16 @@ namespace Ecommerce.Order.Persistance.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer(
+                "Server=192.168.0.208,1440;Database=EcommerceOrderDb;User Id=sa;Password=123456Aa*;Encrypt=False;TrustServerCertificate=True;",
+                sqlOptions =>
+                {
+                    sqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 5,
+                        maxRetryDelay: TimeSpan.FromSeconds(10),
+                        errorNumbersToAdd: null
+                    );
+                });
         }
 
         public DbSet<Address> Addresses { get; set; }
