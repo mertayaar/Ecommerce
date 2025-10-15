@@ -1,6 +1,6 @@
 ﻿namespace Ecommerce.Cart.Dtos
 {
-    public class CartTotal
+    public class CartTotalDto
     {
         public string UserId { get; set; }
         public string DiscountCode { get; set; }
