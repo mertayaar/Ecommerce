@@ -15,6 +15,9 @@ out/
 *.userosscache
 *.sln.docstates
 
+# Folders
+wwwroot/ecommerce-template
+
 # Visual Studio
 .vs/
 .Idea/
@@ -123,3 +126,4 @@ _ReSharper*/
 
 # Misc
 Thumbs.db
+/frontends/Ecommerce.WebUI/wwwroot/ecommerce-template
