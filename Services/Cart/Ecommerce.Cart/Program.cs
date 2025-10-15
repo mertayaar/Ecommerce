@@ -2,10 +2,15 @@ using Ecommerce.Cart.LoginServices;
 using Ecommerce.Cart.Services;
 using Ecommerce.Cart.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
     opt.Authority = builder.Configuration["IdentityServerUrl"];
@@ -20,15 +25,18 @@ builder.Services.Configure<RedisSettings>(builder.Configuration.GetSection("Redi
 builder.Services.AddSingleton<RedisService>(sp =>
 {
     var redisSettings = sp.GetRequiredService<IOptions<RedisSettings>>().Value;
-    var redis = new RedisService(redisSettings.Host, redisSettings.Port);
+    var redis = new RedisService(redisSettings.Host,redisSettings.Port);
     redis.Connect();
     return redis;
 });
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddControllers(opt =>
+{
+    opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
+});
+
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
@@ -40,7 +48,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

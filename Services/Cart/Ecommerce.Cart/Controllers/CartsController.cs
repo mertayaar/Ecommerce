@@ -1,11 +1,13 @@
 ﻿using Ecommerce.Cart.Dtos;
 using Ecommerce.Cart.LoginServices;
 using Ecommerce.Cart.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Cart.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CartsController : ControllerBase
@@ -22,6 +24,7 @@ namespace Ecommerce.Cart.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMyCartDetail()
         {
+            var user = User.Claims;
             var values = await _cartService.GetCart(_loginService.GetUserId);
             return Ok(values);
         }

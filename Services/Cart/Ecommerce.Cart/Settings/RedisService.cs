@@ -14,8 +14,8 @@ namespace Ecommerce.Cart.Settings
             _port = port;
         }
 
-        public void Connect() => _connectionMultiplexer = ConnectionMultiplexer.Connect($"{_host} :{_port}");
+        public void Connect()=>_connectionMultiplexer = ConnectionMultiplexer.Connect($"{_host}:{_port}");
         
-        public IDatabase GetDb (int db=1) => _connectionMultiplexer.GetDatabase(0);
+        public IDatabase GetDb(int db=1) => _connectionMultiplexer.GetDatabase(0);
     } 
 }
