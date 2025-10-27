@@ -1,0 +1,29 @@
+﻿@model UpdateSponsorBrandDto
+@{
+    ViewData["Title"] = "UpdateSponsorBrand";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Update Sponsor Brand</h4>
+                <div class="bs-example" data-example-id="bordered-table">
+                    <form method="post">
+                        <input type="hidden" asp-for="SponsorBrandId" />
+                        <label>Brand Name</label>
+                        <input type="text" class="form-control" asp-for="BrandName" />
+                        <br />
+                        <label>Image</label>
+                        <input type="text" class="form-control" asp-for="ImageUrl" />
+                        <br />
+                        <button class="btn btn-primary">Update Sponsor Brand</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
