@@ -2,41 +2,40 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
-    int count = 0;
 }
 
 <section class="content container-fluid">
     <div class="row">
         <div class="col-md-12">
             <div class="chart-box">
-                <div class="bs-example" data-example-id="bordered-table">
-                    <table class="table table-bordered">
-                        <thead>
+                <a href="/Admin/Category/CreateCategory/" class="btn btn-light"><i class="fa fa-plus me-1"></i>Add Category</a>
+                <div class="card-body p-0">
+                    <table class="table table-hover table-striped align-middle mb-0 ">
+                        <thead class="table-light">
                             <tr>
-                                <th>#</th>
+                                <th style="width: 120px;">Image</th>
                                 <th>Category Name</th>
-                                <th>Update</th>
-                                <th>Delete</th>
+                                <th style="width: 240px;">Operations</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(var item in Model )
+                            @foreach (var item in Model)
                             {
-                                count++;
                                 <tr>
-                                    <th scope="row">@count</th>
+                                    <td><img src="@item.ImageUrl" style="width:100px; height:80px;" /></td>
                                     <td>@item.CategoryName</td>
-                                    <td><a href="/Admin/Category/UpdateCategory/@item.CategoryId" class="btn btn-success">Update</a></td>
-                                    <td><a href="/Admin/Category/DeleteCategory/@item.CategoryId" class="btn btn-danger">Delete</a></td>                   
+
+                                    <td>
+                                        <a href="/Admin/Category/UpdateCategory/@item.CategoryId" class="btn btn-warning me-2"><i class="fa fa-pencil"></i> Update</a>
+                                        <a href="/Admin/Category/DeleteCategory/@item.CategoryId" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?');"><i class="fa fa-trash"></i> Delete</a>
+                                    </td>
                                 </tr>
-                            }        
+                            }
                         </tbody>
                     </table>
-                    <a href="/Admin/Category/CreateCategory/" class="btn btn-danger">Add New Category</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 

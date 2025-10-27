@@ -1,0 +1,47 @@
+﻿@model List<ResultProductWithCategoryDto>
+
+@{
+    ViewData["Title"] = "ProductListWithCategory";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <a href="/Admin/Product/CreateProduct/" class="btn btn-light"><i class="fa fa-plus me-1"></i>Add Product</a>
+                <div class="card-body p-0">
+                    <table class="table table-hover table-striped align-middle mb-0 ">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width: 120px;">Image</th>
+                                <th>Product Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Category</th>
+                                <th style="width: 240px;">Operations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td><img src="@item.ProductImageUrl" style="width:100px; height:80px;" /></td>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.ProductDescription</td>
+                                    <td>@item.ProductPrice</td>
+                                    <td>@item.Category.CategoryName</td>
+                                    <td>
+                                        <a href="/Admin/Product/UpdateProduct/@item.ProductId" class="btn btn-warning me-2"><i class="fa fa-pencil"></i> Update</a>
+                                        <a href="/Admin/Product/DeleteProduct/@item.ProductId" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this product?');"><i class="fa fa-trash"></i> Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

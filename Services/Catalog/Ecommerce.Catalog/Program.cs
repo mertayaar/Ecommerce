@@ -1,7 +1,13 @@
+using Ecommerce.Catalog.Services.AboutServices;
 using Ecommerce.Catalog.Services.CategoryServices;
+using Ecommerce.Catalog.Services.FeatureServices;
+using Ecommerce.Catalog.Services.FeatureSliderServices;
+using Ecommerce.Catalog.Services.OfferDiscountServices;
 using Ecommerce.Catalog.Services.ProductDetailServices;
 using Ecommerce.Catalog.Services.ProductImageServices;
 using Ecommerce.Catalog.Services.ProductServices;
+using Ecommerce.Catalog.Services.SpecialOfferServices;
+using Ecommerce.Catalog.Services.SponsorBrandServices;
 using Ecommerce.Catalog.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
@@ -22,6 +28,12 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductDetailService, ProductDetailService>();
 builder.Services.AddScoped<IProductImageService, ProductImageService>();
+builder.Services.AddScoped<IFeatureSliderService, FeatureSliderService>();
+builder.Services.AddScoped<ISpecialOfferService, SpecialOfferService>();
+builder.Services.AddScoped<IFeatureService, FeatureService>();
+builder.Services.AddScoped<IOfferDiscountService, OfferDiscountService>();
+builder.Services.AddScoped<ISponsorBrandService, SponsorBrandService>();
+builder.Services.AddScoped<IAboutService, AboutService>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
