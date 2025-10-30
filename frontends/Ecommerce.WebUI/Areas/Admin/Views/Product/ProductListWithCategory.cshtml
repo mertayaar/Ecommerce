@@ -20,18 +20,20 @@
                                 <th>Description</th>
                                 <th>Price</th>
                                 <th>Category</th>
+                                <th>Additional Images</th>
                                 <th style="width: 240px;">Operations</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
+                                <tr> 
                                     <td><img src="@item.ProductImageUrl" style="width:100px; height:80px;" /></td>
                                     <td>@item.ProductName</td>
                                     <td>@item.ProductDescription</td>
                                     <td>@item.ProductPrice</td>
                                     <td>@item.Category.CategoryName</td>
+                                    <td><a href="/Admin/ProductImage/UpdateProductImageDetail/@item.ProductId" class="btn btn-info me-2"><i class="fa fa-pencil"></i>Additional Images</a></td>
                                     <td>
                                         <a href="/Admin/Product/UpdateProduct/@item.ProductId" class="btn btn-warning me-2"><i class="fa fa-pencil"></i> Update</a>
                                         <a href="/Admin/Product/DeleteProduct/@item.ProductId" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this product?');"><i class="fa fa-trash"></i> Delete</a>
