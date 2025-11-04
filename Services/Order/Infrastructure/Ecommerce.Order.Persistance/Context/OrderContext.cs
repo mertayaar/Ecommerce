@@ -1,5 +1,6 @@
 ﻿using Ecommerce.Order.Domain.Entitites;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +11,18 @@ namespace Ecommerce.Order.Persistance.Context
 {
     public class OrderContext : DbContext
     {
+        private readonly IConfiguration _configuration;
+        private readonly string _connectionString;
+
+        public OrderContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _connectionString = _configuration.GetConnectionString("DefaultConnection");
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(
-                "Server=192.168.0.208,1440;Database=EcommerceOrderDb;User Id=sa;Password=123456Aa*;Encrypt=False;TrustServerCertificate=True;",
-                sqlOptions =>
-                {
-                    sqlOptions.EnableRetryOnFailure(
-                        maxRetryCount: 5,
-                        maxRetryDelay: TimeSpan.FromSeconds(10),
-                        errorNumbersToAdd: null
-                    );
-                });
+            optionsBuilder.UseSqlServer(_connectionString);
         }
 
         public DbSet<Address> Addresses { get; set; }

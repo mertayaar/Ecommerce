@@ -1,5 +1,6 @@
 ﻿using Ecommerce.Cargo.EntityLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,19 +11,20 @@ namespace Ecommerce.Cargo.DataAccessLayer.Concrete
 {
     public class CargoContext : DbContext 
     {
+        private readonly IConfiguration _configuration;
+        private readonly string _connectionString;
+
+        public CargoContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _connectionString = _configuration.GetConnectionString("DefaultConnection");
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(
-                "Server=192.168.0.208,1441;Database=EcommerceCargoDb;User Id=sa;Password=123456Aa*;Encrypt=False;TrustServerCertificate=True;",
-                sqlOptions =>
-                {
-                    sqlOptions.EnableRetryOnFailure(
-                        maxRetryCount: 5,
-                        maxRetryDelay: TimeSpan.FromSeconds(10),
-                        errorNumbersToAdd: null
-                    );
-                });
-        } 
+         
+            optionsBuilder.UseSqlServer(_connectionString);
+        }
 
         public DbSet<CargoCompany> CargoCompanies { get; set; }
         public DbSet<CargoCustomer> CargoCustomers { get; set; }
