@@ -42,6 +42,14 @@ namespace Ecommerce.Review.Controllers
             return Ok();
         }
 
+        [HttpGet("ReviewListByProductId")]
+        public IActionResult ReviewListByProductId([FromQuery] string id)
+        {
+            var values = _context.UserReviews.Where(x => x.ProductId == id).ToList();
+            return Ok(values);
+        }
+
+
         [HttpPut]
         public IActionResult UpdateReview(UserReview userReview)
         {
@@ -57,6 +65,7 @@ namespace Ecommerce.Review.Controllers
             return Ok(value);
         }
 
-
+       
     }
+    //68f41a7e7438fb5ca208b42c
 }
