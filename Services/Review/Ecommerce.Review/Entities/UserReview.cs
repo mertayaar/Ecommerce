@@ -9,7 +9,7 @@
         public string ReviewDetail { get; set; }
         public int Rating { get; set; }
         public DateTime CreatedDate { get; set; }
-        public bool status { get; set; }
+        public bool Status { get; set; }
         public string ProductId { get; set; }
 
     }

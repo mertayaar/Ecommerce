@@ -75,7 +75,7 @@ namespace Ecommerce.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateReview(UpdateReviewDto updateReviewDto)
         {
-
+            updateReviewDto.Status = true;
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateReviewDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
