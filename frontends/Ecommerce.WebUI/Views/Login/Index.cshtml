@@ -1,4 +1,4 @@
-﻿
+﻿@model CreateLoginDto
 @{
     Layout = null;
 }
@@ -28,17 +28,17 @@
 					<button type="button" class="account-button" onclick="window.location.href='/Register/Index'">
 						Don't Have An Account ? 
 					</button>
-				</div>
+				</div>	
 			</div>
 			<form class="form-detail" method="post">
 				<h2>User Login Form</h2>
 				<div class="form-row">
 					<label for="your_email">UserName</label>
-					<input type="text" id="your_username" class="input-text">
+					<input type="text" id="your_username" asp-for="Username" class="input-text">
 				</div>
 					<div class="form-row">
 						<label for="password">Password</label>
-						<input type="password" id="password" class="input-text" required>
+						<input type="password" id="password" asp-for="Password" class="input-text" required>
 					</div>
 				
 				<div class="form-row-last">
