@@ -128,3 +128,12 @@ _ReSharper*/
 Thumbs.db
 /frontends/Ecommerce.WebUI/wwwroot/ecommerce-template
 /frontends/Ecommerce.WebUI/wwwroot/colorlib-regform-30
+/Users.txt
+/ocelotlink.txt
+/ApiGateway/Ecommerce.OcelotGateway/Ecommerce.OcelotGateway.csproj
+/OcelotCodeExample.txt
+/loginindex.txt
+/frontends/Ecommerce.WebUI/Controllers/TestController.cs
+/frontends/Ecommerce.WebUI/Views/Test/Index.cshtml
+/frontends/Ecommerce.WebUI/Views/Test/Test.cshtml
+**/Properties/launchSettings.json
