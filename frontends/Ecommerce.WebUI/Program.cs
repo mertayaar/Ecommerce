@@ -1,4 +1,5 @@
 using Ecommerce.WebUI.Handlers;
+using Ecommerce.WebUI.Services.CatalogServices.AboutServices;
 using Ecommerce.WebUI.Services.CatalogServices.CategoryServices;
 using Ecommerce.WebUI.Services.CatalogServices.FeatureServices;
 using Ecommerce.WebUI.Services.CatalogServices.OfferDiscountServices;
@@ -101,6 +102,12 @@ builder.Services.AddHttpClient<ISponsorBrandService, SponsorBrandService>(opt =>
 {
     opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}/");
 }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+builder.Services.AddHttpClient<IAboutService, AboutService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}/");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
 
 
 var app = builder.Build();
