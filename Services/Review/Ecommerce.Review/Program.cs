@@ -1,9 +1,15 @@
 using Ecommerce.Review.Context;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.Authority = builder.Configuration["IdentityServerUrl"];
+    opt.Audience = "ResourceReview";
+    opt.RequireHttpsMetadata = false;
+});
 
 builder.Services.AddDbContext<ReviewContext>();
 builder.Services.AddControllers();

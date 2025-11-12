@@ -8,7 +8,6 @@ namespace Ecommerce.Review.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
     public class ReviewsController : ControllerBase
     {
         private readonly ReviewContext _context;
@@ -42,8 +41,8 @@ namespace Ecommerce.Review.Controllers
             return Ok();
         }
 
-        [HttpGet("ReviewListByProductId")]
-        public IActionResult ReviewListByProductId([FromQuery] string id)
+        [HttpGet("ReviewListByProductId/{id}")]
+        public IActionResult ReviewListByProductId(string id)
         {
             var values = _context.UserReviews.Where(x => x.ProductId == id).ToList();
             return Ok(values);

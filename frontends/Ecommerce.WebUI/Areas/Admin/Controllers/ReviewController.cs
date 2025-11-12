@@ -27,7 +27,7 @@ namespace Ecommerce.WebUI.Areas.Admin.Controllers
             ViewBag.v3 = "Review List";
 
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7252/api/Reviews");
+            var responseMessage = await client.GetAsync("http://localhost:7225/api/Reviews");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -44,7 +44,7 @@ namespace Ecommerce.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteReview(string id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync("https://localhost:7252/api/Reviews?id=" + id);
+            var responseMessage = await client.DeleteAsync("http://localhost:7225/api/Reviews?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index", "Review", new { area = "Admin" });
@@ -61,7 +61,7 @@ namespace Ecommerce.WebUI.Areas.Admin.Controllers
             ViewBag.v2 = "Update Review";
             ViewBag.v3 = "Review Operations";
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7252/api/Reviews/" + id);
+            var responseMessage = await client.GetAsync("http://localhost:7225/api/Reviews/" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -79,7 +79,7 @@ namespace Ecommerce.WebUI.Areas.Admin.Controllers
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateReviewDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("https://localhost:7252/api/Reviews/", stringContent);
+            var responseMessage = await client.PutAsync("http://localhost:7225/api/Reviews/", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index", "Review", new { area = "Admin" });
