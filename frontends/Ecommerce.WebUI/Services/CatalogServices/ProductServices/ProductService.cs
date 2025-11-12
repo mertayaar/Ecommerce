@@ -1,4 +1,5 @@
 ﻿using Ecommerce.DtoLayer.CatalogDtos.ProductDtos;
+using Newtonsoft.Json;
 
 namespace Ecommerce.WebUI.Services.CatalogServices.ProductServices
 {
@@ -36,16 +37,22 @@ namespace Ecommerce.WebUI.Services.CatalogServices.ProductServices
             return values;
         }
 
-        public async Task<List<ResultProductWithCategoryDto>> GetProductsWithCategoryAsync()
+        public async Task<List<ResultProductsWithCategoryDto>> GetProductsWithCategoryAsync()
         {
-            throw new NotImplementedException();
-
+            var responseMessage = await _httpClient.GetAsync("products");
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<List<ResultProductsWithCategoryDto>>(jsonData);
+            return values;
         }
 
-        public Task<List<ResultProductWithCategoryDto>> GetProductsWithCategoryByCategoryIdAsync(string CategoryId)
+        public async Task<List<ResultProductsWithCategoryDto>> GetProductsWithCategoryByCategoryIdAsync(string CategoryId)
         {
-            throw new NotImplementedException();
+            var responseMessage = await _httpClient.GetAsync("products/ProductListWithCategoryByCategoryId/" + CategoryId);
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<List<ResultProductsWithCategoryDto>>(jsonData);
+            return values;
         }
+
 
         public async Task UpdateProductAsync(UpdateProductDto updateProductDto)
         {

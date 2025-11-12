@@ -11,7 +11,7 @@ namespace Ecommerce.WebUI.Services.CatalogServices.ProductServices
 
         Task<UpdateProductDto> GetByIdProductAsync(string id);
 
-        Task<List<ResultProductWithCategoryDto>> GetProductsWithCategoryAsync();
-       Task<List<ResultProductWithCategoryDto>> GetProductsWithCategoryByCategoryIdAsync(string CategoryId);
+        Task<List<ResultProductsWithCategoryDto>> GetProductsWithCategoryAsync();
+        Task<List<ResultProductsWithCategoryDto>> GetProductsWithCategoryByCategoryIdAsync(string CategoryId);
     }
 }
