@@ -1,14 +1,18 @@
 using Ecommerce.WebUI.Handlers;
 using Ecommerce.WebUI.Services.CatalogServices.AboutServices;
 using Ecommerce.WebUI.Services.CatalogServices.CategoryServices;
+using Ecommerce.WebUI.Services.CatalogServices.ContactServices;
 using Ecommerce.WebUI.Services.CatalogServices.FeatureServices;
 using Ecommerce.WebUI.Services.CatalogServices.OfferDiscountServices;
+using Ecommerce.WebUI.Services.CatalogServices.ProductDetailServices;
+using Ecommerce.WebUI.Services.CatalogServices.ProductImageSevices;
 using Ecommerce.WebUI.Services.CatalogServices.ProductServices;
 using Ecommerce.WebUI.Services.CatalogServices.SliderServices;
 using Ecommerce.WebUI.Services.CatalogServices.SpecialOfferServices;
 using Ecommerce.WebUI.Services.CatalogServices.SponsorBrandServices;
 using Ecommerce.WebUI.Services.Concrete;
 using Ecommerce.WebUI.Services.Interfaces;
+using Ecommerce.WebUI.Services.ReviewServices;
 using Ecommerce.WebUI.Settings;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -107,6 +111,28 @@ builder.Services.AddHttpClient<IAboutService, AboutService>(opt =>
 {
     opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}/");
 }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+builder.Services.AddHttpClient<IProductImageService, ProductImageService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}/");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+builder.Services.AddHttpClient<IProductDetailService, ProductDetailService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}/");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+builder.Services.AddHttpClient<IReviewService, ReviewService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Review.Path}/");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+builder.Services.AddHttpClient<IContactService, ContactService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}/");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+
 
 
 

@@ -32,7 +32,7 @@ namespace Ecommerce.Catalog.Controllers
             return Ok(value);
         }
 
-        [HttpGet("GetProductDetailByProductId")]
+        [HttpGet("GetProductDetailByProductId/{id}")]
         public async Task<IActionResult> GetProductDetailByProductId(string id)
         {
             var value = await _ProductDetailService.GetByProductIdProductDetailAsync(id);

@@ -6,7 +6,8 @@ namespace Ecommerce.WebUI.Controllers
     {
         public IActionResult Index()
         {
-            
+            @ViewBag.directory1 = "Home Page";
+            @ViewBag.directory2 = "Product List";
             return View();
         }
     }

@@ -15,22 +15,28 @@ namespace Ecommerce.WebUI.Controllers
         }
         public IActionResult Index(string id)
         {
+            @ViewBag.directory1 = "Home Page";
+            @ViewBag.directory2 = "Products";
+            @ViewBag.directory3 = "Product List";
             ViewBag.i = id;
             return View();
         }
 
         public IActionResult ProductDetail(string id)
         {
+            @ViewBag.directory1 = "Home Page";
+            @ViewBag.directory2 = "Products";
+            @ViewBag.directory3 = "Product List";
             ViewBag.x = id;
             return View();
         }
 
-        //[HttpGet]
-        //public IActionResult AddComment()
-        //{
-        //               return View();
-        //}
-                
+        [HttpGet]
+        public IActionResult AddComment()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddComment(CreateReviewDto createReviewDto)
         {

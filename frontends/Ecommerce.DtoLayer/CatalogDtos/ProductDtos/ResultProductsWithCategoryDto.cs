@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.DtoLayer.CatalogDtos.ProductDtos
 {
-    public class ResultProductWithCategoryDto
+    public class ResultProductsWithCategoryDto
     {
         public string ProductId { get; set; }
         public string ProductName { get; set; }

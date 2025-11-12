@@ -2,7 +2,7 @@
 
 namespace Ecommerce.WebUI.Controllers
 {
-    public class UILayout : Controller
+    public class UILayoutController : Controller
     {
         public IActionResult _UILayout()
         {
