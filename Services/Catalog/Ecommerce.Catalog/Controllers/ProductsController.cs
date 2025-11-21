@@ -1,8 +1,12 @@
-﻿using Ecommerce.Catalog.Dtos.ProductDtos;
+using Ecommerce.Catalog.Dtos.ProductDtos;
 using Ecommerce.Catalog.Services.ProductServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Ecommerce.Common;
 
 namespace Ecommerce.Catalog.Controllers
 {
@@ -22,50 +26,75 @@ namespace Ecommerce.Catalog.Controllers
         public async Task<IActionResult> ProductList()
         {
             var values = await _productService.GetAllProductAsync();
-            return Ok(values);
+            if (values == null || values.Count == 0)
+                return NoContent();
+
+            return Ok(ApiResponse<List<ResultProductDto>>.Ok(values));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(string id)
         {
             var value = await _productService.GetByIdProductAsync(id);
-            return Ok(value);
+            if (value == null)
+                return NotFound(ApiResponse.Fail(string.Format(ApiMessages.IdNotFound, id)));
+
+            return Ok(ApiResponse<GetByIdProductDto>.Ok(value));
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateProduct(CreateProductDto createProductDto)
         {
+            if (!ModelState.IsValid)
+            {
+                var modelErrors = string.Join("; ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
+                return BadRequest(ApiResponse.Fail(modelErrors));
+            }
+
             await _productService.CreateProductAsync(createProductDto);
-            return Ok(createProductDto);
+            return StatusCode(StatusCodes.Status201Created, ApiResponse.Ok(ApiMessages.Created));
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteProduct(string id)
         {
             await _productService.DeleteProductAsync(id);
-            return Ok();
+            return NoContent();
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateProduct(UpdateProductDto updateProductDto)
         {
+            if (!ModelState.IsValid)
+            {
+                var modelErrors = string.Join("; ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
+                return BadRequest(ApiResponse.Fail(modelErrors));
+            }
+
             await _productService.UpdateProductAsync(updateProductDto);
-            return Ok();
+            return NoContent();
         }
 
         [HttpGet("ProductListWithCategory")]
         public async Task<IActionResult> ProductListWithCategory()
         {
             var values = await _productService.GetProductsWithCategoryAsync();
-            return Ok(values);
+            if (values == null || values.Count == 0)
+                return NoContent();
+
+            return Ok(ApiResponse<List<ResultProductsWithCategoryDto>>.Ok(values));
         }
         [HttpGet("ProductListWithCategoryByCategoryId/{id}")]
         public async Task<IActionResult> ProductListWithCategoryByCategoryId(string id)
         {
             var values = await _productService.GetProductsWithCategoryByCategoryIdAsync(id);
-            return Ok(values);
+            if (values == null || values.Count == 0)
+                return NoContent();
+
+            return Ok(ApiResponse<List<ResultProductsWithCategoryDto>>.Ok(values));
         }
 
     }
 }
+
 

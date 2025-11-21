@@ -11,6 +11,8 @@ namespace Ecommerce.Cart.LoginServices
             _httpContextAccessor = contextAccessor;
         }
 
-        public string GetUserId => _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        public string GetUserId => _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+
     }
 }

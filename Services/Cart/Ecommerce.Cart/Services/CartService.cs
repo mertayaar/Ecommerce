@@ -22,6 +22,13 @@ namespace Ecommerce.Cart.Services
         public async Task<CartTotalDto> GetCart(string userId)
         {
             var existCart =await _redisService.GetDb().StringGetAsync(userId);
+            if (string.IsNullOrEmpty(existCart))
+            {
+                return new CartTotalDto
+                {
+                    CartItems = new List<CartItemDto>(),
+                };
+            }
             return JsonSerializer.Deserialize<CartTotalDto>(existCart);
             
         }

@@ -21,10 +21,18 @@ namespace Ecommerce.Order.Application.Features.CQRS.Handlers.AddressHandlers
         {
             await _repository.CreateAsync(new Address
             {
+                Name = createAddressCommand.Name,
+                Surname = createAddressCommand.Surname,
+                Phone = createAddressCommand.Phone,
+                Email = createAddressCommand.Email,
+                AddressLine1 = createAddressCommand.AddressLine1,
+                AddressLine2 = createAddressCommand.AddressLine2,
                 City = createAddressCommand.City,
-                Detail = createAddressCommand.Detail,
                 District = createAddressCommand.District,
-                UserId = createAddressCommand.UserId,
+                State = createAddressCommand.State,
+                ZipCode = createAddressCommand.ZipCode,
+                Country = createAddressCommand.Country,
+                UserId = createAddressCommand.UserId
             });
         }
 

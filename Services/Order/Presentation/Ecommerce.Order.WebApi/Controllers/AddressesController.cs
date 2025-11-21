@@ -1,9 +1,12 @@
-﻿using Ecommerce.Order.Application.Features.CQRS.Commands.AddressCommands;
+using Ecommerce.Order.Application.Features.CQRS.Commands.AddressCommands;
 using Ecommerce.Order.Application.Features.CQRS.Handlers.AddressHandlers;
 using Ecommerce.Order.Application.Features.CQRS.Queries.AddressQueries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
+using Ecommerce.Common;
 
 namespace Ecommerce.Order.WebApi.Controllers
 {
@@ -30,36 +33,55 @@ namespace Ecommerce.Order.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> AddressList()
         {
-            var values =await _getAddressQueryHandler.Handle();
-            return Ok(values);
+            var values = await _getAddressQueryHandler.Handle();
+            if (values == null)
+                return NoContent();
+
+            return Ok(ApiResponse<object>.Ok(values));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> AddressListById(int id)
         {
             var values = await _getAddressByIdQueryHandler.Handle(new GetAddressByIdQuery(id));
-            return Ok(values);
+            if (values == null)
+                return NotFound(ApiResponse.Fail(string.Format(ApiMessages.IdNotFound, id)));
+
+            return Ok(ApiResponse<object>.Ok(values));
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateAddress(CreateAddressCommand command)
-        { 
+        {
+            if (!ModelState.IsValid)
+            {
+                var modelErrors = string.Join("; ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
+                return BadRequest(ApiResponse.Fail(modelErrors));
+            }
+
             await _createAddressCommandHandler.Handle(command);
-            return Ok();
+            return StatusCode(StatusCodes.Status201Created, ApiResponse.Ok(ApiMessages.Created));
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateAddress(UpdateAddressCommand command)
         {
+            if (!ModelState.IsValid)
+            {
+                var modelErrors = string.Join("; ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
+                return BadRequest(ApiResponse.Fail(modelErrors));
+            }
+
             await _updateAddressCommandHandler.Handle(command);
-            return Ok();
+            return NoContent();
         }
 
         [HttpDelete]
         public async Task<IActionResult> RemoveAddress(int id)
         {
             await _removeAddressCommandHandler.Handle(new RemoveAddressCommand(id));
-            return Ok();
+            return NoContent();
         }
     }
 }
+

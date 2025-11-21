@@ -137,3 +137,4 @@ Thumbs.db
 /frontends/Ecommerce.WebUI/Views/Test/Index.cshtml
 /frontends/Ecommerce.WebUI/Views/Test/Test.cshtml
 **/Properties/launchSettings.json
+/frontends/Ecommerce.WebUI/wwwroot/spica

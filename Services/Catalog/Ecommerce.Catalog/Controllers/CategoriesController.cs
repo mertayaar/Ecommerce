@@ -1,8 +1,12 @@
-﻿using Ecommerce.Catalog.Dtos.CategoryDtos;
+using Ecommerce.Catalog.Dtos.CategoryDtos;
 using Ecommerce.Catalog.Services.CategoryServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Ecommerce.Common;
 
 namespace Ecommerce.Catalog.Controllers
 {
@@ -22,35 +26,54 @@ namespace Ecommerce.Catalog.Controllers
         public async Task<IActionResult> CategoryList()
         {
             var values = await _categoryService.GetAllCategoryAsync();
-            return Ok(values);
+            if (values == null || values.Count == 0)
+                return NoContent();
+
+            return Ok(ApiResponse<List<ResultCategoryDto>>.Ok(values));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategoryById(string id)
         {
             var value = await _categoryService.GetByIdCategoryAsync(id);
-            return Ok(value);
+            if (value == null)
+                return NotFound(ApiResponse.Fail(string.Format(ApiMessages.IdNotFound, id)));
+
+            return Ok(ApiResponse<GetByIdCategoryDto>.Ok(value));
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CreateCategoryDto createCategoryDto)
         {
+            if (!ModelState.IsValid)
+            {
+                var modelErrors = string.Join("; ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
+                return BadRequest(ApiResponse.Fail(modelErrors));
+            }
+
             await _categoryService.CreateCategoryAsync(createCategoryDto);
-            return Ok(createCategoryDto);
+            return StatusCode(StatusCodes.Status201Created, ApiResponse.Ok(ApiMessages.Created));
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteCategory(string id)
         {
             await _categoryService.DeleteCategoryAsync(id);
-            return Ok();
+            return NoContent();
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
+            if (!ModelState.IsValid)
+            {
+                var modelErrors = string.Join("; ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
+                return BadRequest(ApiResponse.Fail(modelErrors));
+            }
+
             await _categoryService.UpdateCategoryAsync(updateCategoryDto);
-            return Ok();
+            return NoContent();
         }
     }
 }
+

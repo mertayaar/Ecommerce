@@ -4,6 +4,7 @@ using Ecommerce.Order.Application.Interfaces;
 using Ecommerce.Order.Application.Services;
 using Ecommerce.Order.Persistance.Context;
 using Ecommerce.Order.Persistance.Repositories;
+using Ecommerce.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 
@@ -20,6 +21,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 builder.Services.AddDbContext<OrderContext>();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(IOrderingRepository), typeof(OrderingRepository));
 builder.Services.AddApplicationService(builder.Configuration);
 
 
@@ -58,6 +60,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseApiExceptionHandler();
+
 app.UseAuthentication();
 
 app.UseAuthorization();
@@ -65,3 +69,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

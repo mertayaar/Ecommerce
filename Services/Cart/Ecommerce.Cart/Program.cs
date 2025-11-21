@@ -1,6 +1,7 @@
 using Ecommerce.Cart.LoginServices;
 using Ecommerce.Cart.Services;
 using Ecommerce.Cart.Settings;
+using Ecommerce.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -48,9 +49,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseApiExceptionHandler();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+

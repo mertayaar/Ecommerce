@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Order.Application.Features.Mediator.Handlers.OrderingHandlers
 {
-    public class GetOrderingByIdQueryHandler : IRequestHandler<GetOrderingByIdQuery, GetOrderingByIdQueryResult>
+    public class GetOrderingByIdQueryHandler : IRequestHandler<GetOrderingByIdQuery, GetOrderingByUserIdQueryResult>
     {
         private readonly IRepository<Ordering> _repository;
 
@@ -20,10 +20,10 @@ namespace Ecommerce.Order.Application.Features.Mediator.Handlers.OrderingHandler
             _repository = repository;
         }
 
-        public async Task<GetOrderingByIdQueryResult> Handle(GetOrderingByIdQuery request, CancellationToken cancellationToken)
+        public async Task<GetOrderingByUserIdQueryResult> Handle(GetOrderingByIdQuery request, CancellationToken cancellationToken)
         {
            var values = await _repository.GetByIdAsync(request.Id);
-            return new GetOrderingByIdQueryResult
+            return new GetOrderingByUserIdQueryResult
             {
                 OrderDate = values.OrderDate,
                 OrderingId = values.OrderingId,

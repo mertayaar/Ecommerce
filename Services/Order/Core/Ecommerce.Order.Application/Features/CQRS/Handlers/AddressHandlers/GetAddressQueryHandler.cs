@@ -23,9 +23,16 @@ namespace Ecommerce.Order.Application.Features.CQRS.Handlers.AddressHandlers
             return values.Select(x => new GetAddressQueryResult
             {
                 AddressId = x.AddressId,
+                Name = x.Name,
+                Surname = x.Surname,
+                Email = x.Email,
+                Phone = x.Phone,
+                AddressLine1 = x.AddressLine1,
+                AddressLine2 = x.AddressLine2,
                 City = x.City,
-                Detail = x.Detail,
                 District = x.District,
+                Country = x.Country,
+                ZipCode = x.ZipCode,
                 UserId = x.UserId
             }).ToList();
         }

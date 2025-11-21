@@ -22,7 +22,7 @@ namespace Ecommerce.WebUI.Controllers
         {
             @ViewBag.directory1 = "Home Page";
             @ViewBag.directory2 = "Contact";
-            @ViewBag.directory2 = "Send Message";
+            @ViewBag.directory3 = "Send Message";
             return View();
         }
 

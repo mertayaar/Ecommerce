@@ -1,8 +1,12 @@
-﻿using Ecommerce.Review.Context;
+using Ecommerce.Review.Context;
 using Ecommerce.Review.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Ecommerce.Common;
 
 namespace Ecommerce.Review.Controllers
 {
@@ -18,53 +22,76 @@ namespace Ecommerce.Review.Controllers
         }
 
         [HttpGet]
-        public IActionResult ReviewList()
+        public async Task<IActionResult> ReviewList()
         {
-            var values = _context.UserReviews.ToList();
-            return Ok(values);
+            var values = await _context.UserReviews.ToListAsync();
+            if (values == null || values.Count == 0)
+                return NoContent();
+
+            return Ok(ApiResponse<object>.Ok(values));
         }
 
         [HttpPost]
-        public IActionResult CreateReview(UserReview userReview)
+        public async Task<IActionResult> CreateReview(UserReview userReview)
         {
-            _context.UserReviews.Add(userReview);
-            _context.SaveChanges();
-            return Ok();
+            if (!ModelState.IsValid)
+            {
+                var modelErrors = string.Join("; ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
+                return BadRequest(ApiResponse.Fail(modelErrors));
+            }
+
+            await _context.UserReviews.AddAsync(userReview);
+            await _context.SaveChangesAsync();
+            return StatusCode(StatusCodes.Status201Created, ApiResponse.Ok(ApiMessages.Created));
         }
 
         [HttpDelete]
-        public IActionResult DeleteReview(int id)
+        public async Task<IActionResult> DeleteReview(int id)
         {
-            var value = _context.UserReviews.Find(id);
+            var value = await _context.UserReviews.FindAsync(id);
+            if (value == null)
+                return NotFound(ApiResponse.Fail(string.Format(ApiMessages.IdNotFound, id)));
+
             _context.UserReviews.Remove(value);
-            _context.SaveChanges();
-            return Ok();
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
 
         [HttpGet("ReviewListByProductId/{id}")]
-        public IActionResult ReviewListByProductId(string id)
+        public async Task<IActionResult> ReviewListByProductId(string id)
         {
-            var values = _context.UserReviews.Where(x => x.ProductId == id).ToList();
-            return Ok(values);
+            var values = await _context.UserReviews.Where(x => x.ProductId == id).ToListAsync();
+            if (values == null || values.Count == 0)
+                return NoContent();
+
+            return Ok(ApiResponse<object>.Ok(values));
         }
 
 
         [HttpPut]
-        public IActionResult UpdateReview(UserReview userReview)
+        public async Task<IActionResult> UpdateReview(UserReview userReview)
         {
+            if (!ModelState.IsValid)
+            {
+                var modelErrors = string.Join("; ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
+                return BadRequest(ApiResponse.Fail(modelErrors));
+            }
+
             _context.UserReviews.Update(userReview);
-            _context.SaveChanges();
-            return Ok();
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetReview(int id)
+        public async Task<IActionResult> GetReview(int id)
         {
-            var value = _context.UserReviews.Find(id);
-            return Ok(value);
+            var value = await _context.UserReviews.FindAsync(id);
+            if (value == null)
+                return NotFound(ApiResponse.Fail(string.Format(ApiMessages.IdNotFound, id)));
+
+            return Ok(ApiResponse<UserReview>.Ok(value));
         }
 
-       
     }
-    //68f41a7e7438fb5ca208b42c
 }
+

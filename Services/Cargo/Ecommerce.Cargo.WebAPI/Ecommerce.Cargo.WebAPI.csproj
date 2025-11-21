@@ -26,6 +26,7 @@
     <ProjectReference Include="..\Ecommerce.Cargo.DataAccessLayer\Ecommerce.Cargo.DataAccessLayer.csproj" />
     <ProjectReference Include="..\Ecommerce.Cargo.DtoLayer\Ecommerce.Cargo.DtoLayer.csproj" />
     <ProjectReference Include="..\Ecommerce.Cargo.EntityLayer\Ecommerce.Cargo.EntityLayer.csproj" />
+    <ProjectReference Include="..\..\..\shared\Ecommerce.Common\Ecommerce.Common.csproj" />
   </ItemGroup>
 
 </Project>

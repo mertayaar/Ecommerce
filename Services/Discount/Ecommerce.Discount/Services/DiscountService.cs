@@ -4,7 +4,7 @@ using Ecommerce.Discount.Dtos;
 
 namespace Ecommerce.Discount.Services
 {
-    public class DiscountService : IdiscountService
+    public class DiscountService : IDiscountService
     {
         private readonly DapperContext _context;
 
@@ -59,6 +59,30 @@ namespace Ecommerce.Discount.Services
                 return values;
             }
         }
+
+        public async Task<ResultDiscountCouponDto> GetCodeDetailByCodeAsync(string code)
+        {
+            string query = "select * from Coupons where CouponCode=@code";
+            var parameters = new DynamicParameters();
+            parameters.Add("@code", code);
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryFirstOrDefaultAsync<ResultDiscountCouponDto>(query, parameters);
+                return values;
+            }
+        }
+
+        //public int GetDiscountCouponRate(string code)
+        //{
+        //    string query = "select Rate from Coupons where Code=@code";
+        //    var parameters = new DynamicParameters();
+        //    parameters.Add("@code", code);
+        //    using (var connection = _context.CreateConnection())
+        //    {
+        //        var values =  connection.Query(query, parameters);
+        //        return int.Parse(values.ToString());
+        //    }
+        //}
 
         public async Task UpdateDiscountCouponAsync(UpdateDiscountCouponDto updateCouponDto)
         {

@@ -1,5 +1,6 @@
 using Ecommerce.Discount.Context;
 using Ecommerce.Discount.Services;
+using Ecommerce.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 
@@ -14,7 +15,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 // Add services to the container.
 builder.Services.AddTransient<DapperContext>();
-builder.Services.AddTransient<IdiscountService, DiscountService>();
+builder.Services.AddTransient<IDiscountService, DiscountService>();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
@@ -35,9 +36,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseApiExceptionHandler();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+
