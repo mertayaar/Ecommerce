@@ -1,4 +1,5 @@
 ﻿
+using Ecommerce.Common;
 using Ecommerce.DtoLayer.CartDtos;
 
 namespace Ecommerce.WebUI.Services.CartServices
@@ -41,8 +42,8 @@ namespace Ecommerce.WebUI.Services.CartServices
         public async Task<CartTotalDto> GetCart()
         {
             var responseMessage = await _httpClient.GetAsync("carts");
-            var values = await responseMessage.Content.ReadFromJsonAsync<CartTotalDto>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<CartTotalDto>>();
+            return values.Data;
         }
 
         public async Task<bool> RemoveItemFromCart(string productId)

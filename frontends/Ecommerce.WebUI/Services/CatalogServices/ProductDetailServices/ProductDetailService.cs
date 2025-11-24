@@ -1,4 +1,5 @@
-﻿using Ecommerce.DtoLayer.CatalogDtos.ProductDetailDtos;
+﻿using Ecommerce.Common;
+using Ecommerce.DtoLayer.CatalogDtos.ProductDetailDtos;
 
 namespace Ecommerce.WebUI.Services.CatalogServices.ProductDetailServices
 {
@@ -24,22 +25,22 @@ namespace Ecommerce.WebUI.Services.CatalogServices.ProductDetailServices
         public async Task<List<ResultProductDetailDto>> GetAllProductDetailAsync()
         {
             var responseMessage = await _httpClient.GetAsync("productdetails");
-            var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultProductDetailDto>>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<List<ResultProductDetailDto>>>();
+            return values.Data;
         }
 
         public async Task<GetByIdProductDetailDto> GetByIdProductDetailAsync(string id)
         {
             var responseMessage = await _httpClient.GetAsync("productdetails/" + id);
-            var values = await responseMessage.Content.ReadFromJsonAsync<GetByIdProductDetailDto>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<GetByIdProductDetailDto>>();
+            return values.Data;
         }
 
         public async Task<GetByIdProductDetailDto> GetByProductIdProductDetailAsync(string id)
         {
             var responseMessage = await _httpClient.GetAsync("productdetails/GetProductDetailByProductId/" + id);
-            var values = await responseMessage.Content.ReadFromJsonAsync<GetByIdProductDetailDto>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<GetByIdProductDetailDto>>();
+            return values.Data;
         }
 
        

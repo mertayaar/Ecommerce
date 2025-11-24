@@ -1,4 +1,5 @@
-﻿using Ecommerce.DtoLayer.CatalogDtos.FeatureSliderDtos;
+﻿using Ecommerce.Common;
+using Ecommerce.DtoLayer.CatalogDtos.FeatureSliderDtos;
 
 namespace Ecommerce.WebUI.Services.CatalogServices.SliderServices
 {
@@ -34,15 +35,15 @@ namespace Ecommerce.WebUI.Services.CatalogServices.SliderServices
         public async Task<List<ResultFeatureSliderDto>> GetAllFeatureSliderAsync()
         {
             var responseMessage = await _httpClient.GetAsync("featuresliders");
-            var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultFeatureSliderDto>>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<List<ResultFeatureSliderDto>>>();
+            return values.Data;
         }
 
         public async Task<UpdateFeatureSliderDto> GetByIdFeatureSliderAsync(string id)
         {
             var responseMessage = await _httpClient.GetAsync("featuresliders/" + id);
-            var values = await responseMessage.Content.ReadFromJsonAsync<UpdateFeatureSliderDto>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<UpdateFeatureSliderDto>>();
+            return values.Data;
         }
 
         public async Task UpdateFeatureSliderAsync(UpdateFeatureSliderDto updateFeatureSliderDto)

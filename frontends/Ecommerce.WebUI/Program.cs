@@ -1,4 +1,6 @@
 using Ecommerce.WebUI.Handlers;
+using Ecommerce.WebUI.Services.CargoServices.CargoCompanyServices;
+using Ecommerce.WebUI.Services.CargoServices.CargoCustomerServices;
 using Ecommerce.WebUI.Services.CartServices;
 using Ecommerce.WebUI.Services.CatalogServices.AboutServices;
 using Ecommerce.WebUI.Services.CatalogServices.CategoryServices;
@@ -80,6 +82,16 @@ builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 builder.Services.AddHttpClient<ICartService, CartService>(opt =>
 {
     opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Cart.Path}/");
+}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+builder.Services.AddHttpClient<ICargoCompanyService, CargoCompanyService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Cargo.Path}/");
+}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+builder.Services.AddHttpClient<ICargoCustomerService, CargoCustomerService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Cargo.Path}/");
 }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
 builder.Services.AddHttpClient<IUserIdentityService, UserIdentityService>(opt =>

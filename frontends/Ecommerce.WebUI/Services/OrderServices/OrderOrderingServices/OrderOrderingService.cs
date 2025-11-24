@@ -1,4 +1,5 @@
-﻿using Ecommerce.DtoLayer.OrderDtos.OrderOrderingDtos;
+﻿using Ecommerce.Common;
+using Ecommerce.DtoLayer.OrderDtos.OrderOrderingDtos;
 
 namespace Ecommerce.WebUI.Services.OrderServices.OrderOrderingServices
 {
@@ -13,8 +14,8 @@ namespace Ecommerce.WebUI.Services.OrderServices.OrderOrderingServices
         public async Task<List<ResultOrderingByUserIdDto>> GetOrderingByUserIdAsync(string id)
         {
             var responseMessage = await _httpClient.GetAsync($"orderings/GetOrderingByUserId/{id}");
-            var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultOrderingByUserIdDto>>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<List<ResultOrderingByUserIdDto>>>();
+            return values.Data;
         }
     }
 }

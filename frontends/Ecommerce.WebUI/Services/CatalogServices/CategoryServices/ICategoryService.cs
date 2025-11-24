@@ -1,4 +1,5 @@
-﻿using Ecommerce.DtoLayer.CatalogDtos.CategoryDtos;
+﻿using Ecommerce.Common;
+using Ecommerce.DtoLayer.CatalogDtos.CategoryDtos;
 
 namespace Ecommerce.WebUI.Services.CatalogServices.CategoryServices
 {

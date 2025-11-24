@@ -1,4 +1,5 @@
-﻿using Ecommerce.DtoLayer.CatalogDtos.OfferDiscountDtos;
+﻿using Ecommerce.Common;
+using Ecommerce.DtoLayer.CatalogDtos.OfferDiscountDtos;
 
 namespace Ecommerce.WebUI.Services.CatalogServices.OfferDiscountServices
 {
@@ -24,15 +25,15 @@ namespace Ecommerce.WebUI.Services.CatalogServices.OfferDiscountServices
         public async Task<List<ResultOfferDiscountDto>> GetAllOfferDiscountAsync()
         {
             var responseMessage = await _httpClient.GetAsync("offerdiscounts");
-            var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultOfferDiscountDto>>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<List<ResultOfferDiscountDto>>>();
+            return values.Data;
         }
 
         public async Task<UpdateOfferDiscountDto> GetByIdOfferDiscountAsync(string id)
         {
             var responseMessage = await _httpClient.GetAsync("offerdiscounts/" + id);
-            var values = await responseMessage.Content.ReadFromJsonAsync<UpdateOfferDiscountDto>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<UpdateOfferDiscountDto>>();
+            return values.Data;
         }
 
         public async Task UpdateOfferDiscountAsync(UpdateOfferDiscountDto updateOfferDiscountDto)

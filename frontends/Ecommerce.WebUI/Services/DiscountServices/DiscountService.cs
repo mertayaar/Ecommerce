@@ -1,4 +1,5 @@
-﻿using Ecommerce.DtoLayer.DiscountDtos;
+﻿using Ecommerce.Common;
+using Ecommerce.DtoLayer.DiscountDtos;
 
 namespace Ecommerce.WebUI.Services.DiscountServices
 {
@@ -14,8 +15,8 @@ namespace Ecommerce.WebUI.Services.DiscountServices
         public async Task<GetDiscountCodeDetailByCode>? GetDiscountCode(string code)
         {
             var responseMessage = await _httpClient.GetAsync($"discounts/GetCodeDetailByCode?code={code}");
-            var values = await responseMessage.Content.ReadFromJsonAsync<GetDiscountCodeDetailByCode>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<GetDiscountCodeDetailByCode>>();
+            return values.Data;
         }
     }
 }

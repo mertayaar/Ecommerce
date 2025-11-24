@@ -1,4 +1,5 @@
-﻿using Ecommerce.DtoLayer.CatalogDtos.ProductImageDtos;
+﻿using Ecommerce.Common;
+using Ecommerce.DtoLayer.CatalogDtos.ProductImageDtos;
 
 namespace Ecommerce.WebUI.Services.CatalogServices.ProductImageSevices
 {
@@ -24,22 +25,22 @@ namespace Ecommerce.WebUI.Services.CatalogServices.ProductImageSevices
         public async Task<List<ResultProductImageDto>> GetAllProductImageAsync()
         {
             var responseMessage = await _httpClient.GetAsync("productimages");
-            var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultProductImageDto>>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<List<ResultProductImageDto>>>();
+            return values.Data;
         }
 
         public async Task<GetByIdProductImageDto> GetByIdProductImageAsync(string id)
         {
             var responseMessage = await _httpClient.GetAsync("productimages/" + id);
-            var values = await responseMessage.Content.ReadFromJsonAsync<GetByIdProductImageDto>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<GetByIdProductImageDto>>();
+            return values.Data;
         }
 
         public async Task<GetByIdProductImageDto> GetByProductIdProductImageAsync(string id)
         {
             var responseMessage = await _httpClient.GetAsync("productimages/ProductImagesByProductId/" + id);
-            var values = await responseMessage.Content.ReadFromJsonAsync<GetByIdProductImageDto>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<GetByIdProductImageDto>> ();
+            return values.Data;
         }
       
 

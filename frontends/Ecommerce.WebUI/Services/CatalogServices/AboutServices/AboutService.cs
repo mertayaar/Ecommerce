@@ -1,4 +1,5 @@
-﻿using Ecommerce.DtoLayer.CatalogDtos.AboutDtos;
+﻿using Ecommerce.Common;
+using Ecommerce.DtoLayer.CatalogDtos.AboutDtos;
 
 namespace Ecommerce.WebUI.Services.CatalogServices.AboutServices
 {
@@ -24,15 +25,15 @@ namespace Ecommerce.WebUI.Services.CatalogServices.AboutServices
         public async Task<List<ResultAboutDto>> GetAllAboutAsync()
         {
             var responseMessage = await _httpClient.GetAsync("abouts");
-            var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultAboutDto>>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<List<ResultAboutDto>>>();
+            return values.Data;
         }
 
         public async Task<UpdateAboutDto> GetByIdAboutAsync(string id)
         {
             var responseMessage = await _httpClient.GetAsync("abouts/" + id);
-            var values = await responseMessage.Content.ReadFromJsonAsync<UpdateAboutDto>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<UpdateAboutDto>>();
+            return values.Data;
         }
 
         public async Task UpdateAboutAsync(UpdateAboutDto updateAboutDto)

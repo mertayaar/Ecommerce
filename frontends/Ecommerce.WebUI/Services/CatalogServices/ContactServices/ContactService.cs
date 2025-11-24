@@ -1,4 +1,5 @@
-﻿using Ecommerce.DtoLayer.CatalogDtos.ContactDtos;
+﻿using Ecommerce.Common;
+using Ecommerce.DtoLayer.CatalogDtos.ContactDtos;
 
 namespace Ecommerce.WebUI.Services.CatalogServices.ContactServices
 {
@@ -24,15 +25,15 @@ namespace Ecommerce.WebUI.Services.CatalogServices.ContactServices
         public async Task<List<ResultContactDto>> GetAllContactAsync()
         {
             var responseMessage = await _httpClient.GetAsync("contacts");
-            var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultContactDto>>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<List<ResultContactDto>>>();
+            return values.Data;
         }
 
         public async Task<GetByIdContactDto> GetByIdContactAsync(string id)
         {
             var responseMessage = await _httpClient.GetAsync("contacts/" + id);
-            var values = await responseMessage.Content.ReadFromJsonAsync<GetByIdContactDto>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<GetByIdContactDto>>();
+            return values.Data;
         }
 
         public async Task UpdateContactAsync(UpdateContactDto updateContactDto)

@@ -1,4 +1,5 @@
-﻿using Ecommerce.DtoLayer.CatalogDtos.CategoryDtos;
+﻿using Ecommerce.Common;
+using Ecommerce.DtoLayer.CatalogDtos.CategoryDtos;
 
 namespace Ecommerce.WebUI.Services.CatalogServices.CategoryServices
 {
@@ -24,15 +25,15 @@ namespace Ecommerce.WebUI.Services.CatalogServices.CategoryServices
         public async Task<List<ResultCategoryDto>> GetAllCategoryAsync()
         {
           var responseMessage =  await _httpClient.GetAsync("categories");
-          var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultCategoryDto>>();
-          return values;
+          var apiResponse = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<List<ResultCategoryDto>>>();
+          return apiResponse?.Data ?? new List<ResultCategoryDto>();
         }
 
         public async Task<UpdateCategoryDto> GetByIdCategoryAsync(string id)
         {
             var responseMessage = await _httpClient.GetAsync("categories/" + id);
-            var values = await responseMessage.Content.ReadFromJsonAsync<UpdateCategoryDto>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<UpdateCategoryDto>>();
+            return values.Data;
         }
 
         public async Task UpdateCategoryAsync(UpdateCategoryDto updateCategoryDto)

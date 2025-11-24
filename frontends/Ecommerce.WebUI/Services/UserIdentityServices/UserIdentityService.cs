@@ -1,4 +1,5 @@
-﻿using Ecommerce.DtoLayer.CatalogDtos.AboutDtos;
+﻿using Ecommerce.Common;
+using Ecommerce.DtoLayer.CatalogDtos.AboutDtos;
 using Ecommerce.DtoLayer.IdentityDtos.UserDtos;
 
 namespace Ecommerce.WebUI.Services.UserIdentityServices
@@ -14,7 +15,7 @@ namespace Ecommerce.WebUI.Services.UserIdentityServices
         }
         public async Task<List<ResultUserDto>> GetAllUserListAsync()
         {
-            var responseMessage = await _httpClient.GetAsync("/api/users/getallusers");
+            var responseMessage = await _httpClient.GetAsync("api/users/GetAllUsers");
             var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultUserDto>>();
             return values;
         }

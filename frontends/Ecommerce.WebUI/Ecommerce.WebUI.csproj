@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\shared\Ecommerce.Common\Ecommerce.Common.csproj" />
     <ProjectReference Include="..\Ecommerce.DtoLayer\Ecommerce.DtoLayer.csproj" />
   </ItemGroup>
 

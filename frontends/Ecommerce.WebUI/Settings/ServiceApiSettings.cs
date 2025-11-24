@@ -13,6 +13,7 @@
         public ServiceApi Review { get; set; }
         public ServiceApi Payment { get; set; }
         public ServiceApi Message { get; set; }
+        public ServiceApi User { get; set; }
     }
 
     public class ServiceApi

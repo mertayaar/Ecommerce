@@ -18,5 +18,6 @@ namespace Ecommerce.WebUI.Controllers
             var values = await _userService.GetUserInfo();
             return View(values);
         }
+
     }
 }

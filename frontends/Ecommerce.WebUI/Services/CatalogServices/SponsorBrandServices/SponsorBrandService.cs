@@ -1,4 +1,5 @@
-﻿using Ecommerce.DtoLayer.CatalogDtos.SponsorBrandDtos;
+﻿using Ecommerce.Common;
+using Ecommerce.DtoLayer.CatalogDtos.SponsorBrandDtos;
 
 namespace Ecommerce.WebUI.Services.CatalogServices.SponsorBrandServices
 {
@@ -24,15 +25,15 @@ namespace Ecommerce.WebUI.Services.CatalogServices.SponsorBrandServices
         public async Task<List<ResultSponsorBrandDto>> GetAllSponsorBrandAsync()
         {
             var responseMessage = await _httpClient.GetAsync("sponsorbrands");
-            var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultSponsorBrandDto>>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<List<ResultSponsorBrandDto>>>();
+            return values.Data;
         }
 
         public async Task<UpdateSponsorBrandDto> GetByIdSponsorBrandAsync(string id)
         {
             var responseMessage = await _httpClient.GetAsync("sponsorbrands/" + id);
-            var values = await responseMessage.Content.ReadFromJsonAsync<UpdateSponsorBrandDto>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<UpdateSponsorBrandDto>>();
+            return values.Data;
         }
 
         public async Task UpdateSponsorBrandAsync(UpdateSponsorBrandDto updateSponsorBrandDto)

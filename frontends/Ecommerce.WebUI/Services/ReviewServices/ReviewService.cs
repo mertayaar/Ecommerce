@@ -1,4 +1,5 @@
-﻿using Ecommerce.DtoLayer.ReviewDtos;
+﻿using Ecommerce.Common;
+using Ecommerce.DtoLayer.ReviewDtos;
 
 namespace Ecommerce.WebUI.Services.ReviewServices
 {
@@ -24,22 +25,22 @@ namespace Ecommerce.WebUI.Services.ReviewServices
         public async Task<List<ResultReviewDto>> GetAllReviewAsync()
         {
             var responseMessage = await _httpClient.GetAsync("reviews");
-            var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultReviewDto>>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<List<ResultReviewDto>>>();
+            return values.Data;
         }
 
         public async Task<UpdateReviewDto> GetByIdReviewAsync(string id)
         {
             var responseMessage = await _httpClient.GetAsync("reviews/" + id);
-            var values = await responseMessage.Content.ReadFromJsonAsync<UpdateReviewDto>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<UpdateReviewDto>>();
+            return values.Data;
         }
 
         public async Task<List<ResultReviewDto>> ReviewListByProductId(string id)
         {
             var responseMessage = await _httpClient.GetAsync("reviews/ReviewListByProductId/" + id);
-            var values = await responseMessage.Content.ReadFromJsonAsync<List<ResultReviewDto>>();
-            return values;
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<List<ResultReviewDto>>>();
+            return values.Data;
         }
 
         public async Task UpdateReviewAsync(UpdateReviewDto updateReviewDto)
