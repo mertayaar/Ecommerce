@@ -10,8 +10,19 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Cargo.DataAccessLayer.EntityFramework
 {
-    public class EfCargoCustomerDal : GenericRepository<CargoCustomer>,ICargoCustomerDal
+    public class EfCargoCustomerDal : GenericRepository<CargoCustomer>, ICargoCustomerDal
     {
-        public EfCargoCustomerDal( CargoContext context ) : base( context ) { }
+        private readonly CargoContext _context;
+
+        public EfCargoCustomerDal(CargoContext context) : base(context)
+        {
+            _context = context;
+        }
+
+        public CargoCustomer GetByUserCustomerId(string id)
+        {
+            var values = _context.CargoCustomers.Where(x => x.UserCustomerId == id).FirstOrDefault();
+            return values;
+        }
     }
 }

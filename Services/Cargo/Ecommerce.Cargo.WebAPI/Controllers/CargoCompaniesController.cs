@@ -1,6 +1,7 @@
 ﻿using Ecommerce.Cargo.BusinessLayer.Abstract;
 using Ecommerce.Cargo.DtoLayer.Dtos.CargoCompanyDtos;
 using Ecommerce.Cargo.EntityLayer.Concrete;
+using Ecommerce.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,14 +24,20 @@ namespace Ecommerce.Cargo.WebAPI.Controllers
         public IActionResult CompanyList()
         {
             var values = _cargoCompanyService.TGetAll();
-            return Ok(values);
+
+            if (values == null || values.Count == 0)
+                return NoContent();
+
+            return Ok(ApiResponse<List<CargoCompany>>.Ok(values));
         }
 
         [HttpGet("{id}")]
         public IActionResult GetCargoCompanyById(int id)
         {
             var values = _cargoCompanyService.TGetById(id);
-            return Ok(values); 
+            if (values == null)
+                return NotFound(ApiResponse.Fail(string.Format(ApiMessages.IdNotFound, id)));
+            return Ok(ApiResponse<CargoCompany>.Ok(values));
         }
 
         [HttpPost]

@@ -42,5 +42,7 @@ namespace Ecommerce.Cargo.BusinessLayer.Concrete
         {
             _cargoCompanyDal.Update(entity);
         }
+
+      
     }
 }

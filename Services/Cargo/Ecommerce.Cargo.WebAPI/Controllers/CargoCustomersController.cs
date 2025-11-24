@@ -38,13 +38,14 @@ namespace Ecommerce.Cargo.WebAPI.Controllers
         {
             CargoCustomer CargoCustomer = new CargoCustomer()
             {
-                 Address = createCargoCustomerDto.Address,
-                 City = createCargoCustomerDto.City,
-                 District = createCargoCustomerDto.District,
-                 Email = createCargoCustomerDto.Email,
-                 Phone = createCargoCustomerDto.Phone,
-                 Name  = createCargoCustomerDto.Name,
-                 Surname = createCargoCustomerDto.Surname,
+                Address = createCargoCustomerDto.Address,
+                City = createCargoCustomerDto.City,
+                District = createCargoCustomerDto.District,
+                Email = createCargoCustomerDto.Email,
+                Phone = createCargoCustomerDto.Phone,
+                Name = createCargoCustomerDto.Name,
+                Surname = createCargoCustomerDto.Surname,
+                UserCustomerId = createCargoCustomerDto.UserCustomerId,
             };
             _cargoCustomerService.TInsert(CargoCustomer);
             return Ok();
@@ -72,11 +73,18 @@ namespace Ecommerce.Cargo.WebAPI.Controllers
                 Surname = updateCargoCustomerDto.Surname,
                 CargoCustomerId = updateCargoCustomerDto.CargoCustomerId
 
-            }; 
+            };
             _cargoCustomerService.TUpdate(CargoCustomer);
 
             return Ok();
         }
 
+        [HttpGet("GetCargoCustomerByUserCustomerId/{id}")]
+        public IActionResult GetCargoCustomerByUserCustomerId(string id)
+        {
+            var values = _cargoCustomerService.TGetByUserCustomerId(id);
+            return Ok(values);
+
+        }
     }
 }

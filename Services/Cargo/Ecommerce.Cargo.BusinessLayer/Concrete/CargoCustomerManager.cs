@@ -28,6 +28,11 @@ namespace Ecommerce.Cargo.BusinessLayer.Concrete
             return _cargoCustomerDal.GetById(id);
         }
 
+        public CargoCustomer TGetByUserCustomerId(string id)
+        {
+            return _cargoCustomerDal.GetByUserCustomerId(id);
+        }
+
         public void TInsert(CargoCustomer entity)
         {
             _cargoCustomerDal.Insert(entity);
@@ -40,7 +45,7 @@ namespace Ecommerce.Cargo.BusinessLayer.Concrete
 
         public void TUpdate(CargoCustomer entity)
         {
-           _cargoCustomerDal.Update(entity); 
+            _cargoCustomerDal.Update(entity);
         }
     }
 }
