@@ -12,7 +12,7 @@ namespace Ecommerce.Catalog.Services.FeatureSliderServices
         private readonly IMongoCollection<FeatureSlider> _featureSliderCollection;
         private readonly IMapper _mapper;
 
-        public FeatureSliderService(IMapper mapper, IdatabaseSettings _databaseSettings)
+        public FeatureSliderService(IMapper mapper, IDatabaseSettings _databaseSettings)
         {
             var client = new MongoClient(_databaseSettings.ConnectionString);
             var database = client.GetDatabase(_databaseSettings.DatabaseName);

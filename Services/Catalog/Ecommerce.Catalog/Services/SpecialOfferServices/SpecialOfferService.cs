@@ -12,7 +12,7 @@ namespace Ecommerce.Catalog.Services.SpecialOfferServices
         private readonly IMongoCollection<SpecialOffer> _specialOfferCollection;
         private readonly IMapper _mapper;
 
-        public SpecialOfferService(IMapper mapper, IdatabaseSettings _databaseSettings)
+        public SpecialOfferService(IMapper mapper, IDatabaseSettings _databaseSettings)
         {
             var client = new MongoClient(_databaseSettings.ConnectionString);
             var database = client.GetDatabase(_databaseSettings.DatabaseName);

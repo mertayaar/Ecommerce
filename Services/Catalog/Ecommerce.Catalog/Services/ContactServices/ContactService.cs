@@ -13,7 +13,7 @@ namespace Ecommerce.Catalog.Services.ContactServices
             private readonly IMongoCollection<Contact> _contactCollection;
             private readonly IMapper _mapper;
 
-            public ContactService(IMapper mapper, IdatabaseSettings _databaseSettings)
+            public ContactService(IMapper mapper, IDatabaseSettings _databaseSettings)
             {
                 var client = new MongoClient(_databaseSettings.ConnectionString);
                 var database = client.GetDatabase(_databaseSettings.DatabaseName);

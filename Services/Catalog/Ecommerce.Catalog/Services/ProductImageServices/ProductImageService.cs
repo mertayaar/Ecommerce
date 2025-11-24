@@ -11,7 +11,7 @@ namespace Ecommerce.Catalog.Services.ProductImageServices
         private readonly IMongoCollection<ProductImage> _productImageCollection;
         private readonly IMapper _mapper;
 
-        public ProductImageService(IMapper mapper, IdatabaseSettings _databaseSettings)
+        public ProductImageService(IMapper mapper, IDatabaseSettings _databaseSettings)
         {
             var client = new MongoClient(_databaseSettings.ConnectionString);
             var database = client.GetDatabase(_databaseSettings.DatabaseName);

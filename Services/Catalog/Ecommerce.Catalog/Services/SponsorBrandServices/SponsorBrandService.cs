@@ -11,7 +11,7 @@ namespace Ecommerce.Catalog.Services.SponsorBrandServices
         private readonly IMongoCollection<SponsorBrand> _sponsorBrandCollection;
         private readonly IMapper _mapper;
 
-        public SponsorBrandService(IMapper mapper, IdatabaseSettings _databaseSettings)
+        public SponsorBrandService(IMapper mapper, IDatabaseSettings _databaseSettings)
         {
             var client = new MongoClient(_databaseSettings.ConnectionString);
             var database = client.GetDatabase(_databaseSettings.DatabaseName);

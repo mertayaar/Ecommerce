@@ -13,7 +13,7 @@ namespace Ecommerce.Catalog.Services.ProductServices
         private readonly IMongoCollection<Category> _categoryCollection;
 
 
-        public ProductService(IMapper mapper, IdatabaseSettings _databaseSettings)
+        public ProductService(IMapper mapper, IDatabaseSettings _databaseSettings)
         {
             var client = new MongoClient(_databaseSettings.ConnectionString);
             var database = client.GetDatabase(_databaseSettings.DatabaseName);

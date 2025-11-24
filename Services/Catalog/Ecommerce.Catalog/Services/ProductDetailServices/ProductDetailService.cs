@@ -10,7 +10,7 @@ namespace Ecommerce.Catalog.Services.ProductDetailServices
     {
         private readonly IMapper _mapper;
 
-        public ProductDetailService(IMapper mapper, IdatabaseSettings _databaseSettings)
+        public ProductDetailService(IMapper mapper, IDatabaseSettings _databaseSettings)
         {
             var client = new MongoClient(_databaseSettings.ConnectionString);
             var database = client.GetDatabase(_databaseSettings.DatabaseName);

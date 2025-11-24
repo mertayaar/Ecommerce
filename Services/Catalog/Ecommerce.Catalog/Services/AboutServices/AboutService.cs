@@ -11,7 +11,7 @@ namespace Ecommerce.Catalog.Services.AboutServices
         private readonly IMongoCollection<About> _aboutCollection;
         private readonly IMapper _mapper;
 
-        public AboutService(IMapper mapper, IdatabaseSettings _databaseSettings)
+        public AboutService(IMapper mapper, IDatabaseSettings _databaseSettings)
         {
             var client = new MongoClient(_databaseSettings.ConnectionString);
             var database = client.GetDatabase(_databaseSettings.DatabaseName);
