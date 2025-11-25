@@ -24,7 +24,7 @@ namespace Ecommerce.Message.Controllers
             if (values == null || values.Count == 0)
                 return NoContent();
 
-            return Ok(ApiResponse<object>.Ok(values));
+            return Ok(ApiResponse<List<ResultMessageDto>>.Ok(values));
         }
 
         [HttpGet("GetMessageOutbox/{senderId}")]
@@ -34,7 +34,7 @@ namespace Ecommerce.Message.Controllers
             if (values == null || values.Count == 0)
                 return NoContent();
 
-            return Ok(ApiResponse<object>.Ok(values));
+            return Ok(ApiResponse<List<ResultOutboxMessageDto>>.Ok(values));
         }
 
         [HttpGet("GetMessageInbox/{receiverId}")]
@@ -44,7 +44,7 @@ namespace Ecommerce.Message.Controllers
             if (values == null || values.Count == 0)
                 return NoContent();
 
-            return Ok(ApiResponse<object>.Ok(values));
+            return Ok(ApiResponse<List<ResultInboxMessageDto>>.Ok(values));
         }
 
         [HttpPost]
@@ -76,6 +76,13 @@ namespace Ecommerce.Message.Controllers
             }
             await _userMessageService.UpdateMessageAsync(updateMessageDto);
             return NoContent();
+        }
+
+        [HttpGet("TotalMessageCount")]
+        public async Task<IActionResult> GetTotalMessageCount()
+        {
+            var values = await _userMessageService.GetTotalMessageCount();
+            return Ok(ApiResponse<int>.Ok(values));
         }
 
     }

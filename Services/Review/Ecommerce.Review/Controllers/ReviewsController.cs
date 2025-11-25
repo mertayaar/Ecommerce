@@ -92,6 +92,24 @@ namespace Ecommerce.Review.Controllers
             return Ok(ApiResponse<UserReview>.Ok(value));
         }
 
+        [HttpGet("ActiveReviewCount")]
+        public async Task<IActionResult> ActiveReviewCount()
+        {
+            var count = await _context.UserReviews.CountAsync(x => x.Status == true);
+            return Ok(ApiResponse<int>.Ok(count));
+        }
+        [HttpGet("PassiveReviewCount")]
+        public async Task<IActionResult> PassiveReviewCount()
+        {
+            var count = await _context.UserReviews.CountAsync(x => x.Status == false);
+            return Ok(ApiResponse<int>.Ok(count));
+        }
+        [HttpGet("TotalReviewCount")]
+        public async Task<IActionResult> TotalReviewCount()
+        {
+            var count = await _context.UserReviews.CountAsync();
+            return Ok(ApiResponse<int>.Ok(count));
+        }
     }
 }
 

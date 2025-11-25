@@ -72,6 +72,16 @@ namespace Ecommerce.Discount.Services
             }
         }
 
+        public async Task<int> GetDiscountCouponCount()
+        {
+            string query = "select Count(*) from Coupons";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryFirstOrDefaultAsync<int>(query);
+                return values;
+            }
+        }
+
         //public int GetDiscountCouponRate(string code)
         //{
         //    string query = "select Rate from Coupons where Code=@code";

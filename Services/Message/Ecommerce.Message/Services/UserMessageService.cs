@@ -56,6 +56,12 @@ namespace Ecommerce.Message.Services
             return _mapper.Map<List<ResultOutboxMessageDto>>(values);
         }
 
+        public async Task<int> GetTotalMessageCount()
+        {
+            var values = await _messageContext.UserMessages.CountAsync();
+            return values;
+        }
+
         public async Task UpdateMessageAsync(UpdateMessageDto updateMessageDto)
         {
             var values = _mapper.Map<UserMessage>(updateMessageDto);

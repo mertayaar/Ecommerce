@@ -22,9 +22,6 @@ namespace Ecommerce.Discount.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(List<ResultDiscountCouponDto>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DiscountCouponList()
         {
             var values = await _discountService.GetAllDiscountCouponAsync();
@@ -35,9 +32,6 @@ namespace Ecommerce.Discount.Controllers
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(GetByIdDiscountCouponDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetDiscountCouponById(int id)
         {
             var values = await _discountService.GetByIdDiscountCouponAsync(id);
@@ -47,10 +41,6 @@ namespace Ecommerce.Discount.Controllers
             return Ok(ApiResponse<GetByIdDiscountCouponDto>.Ok(values));
         }
         [HttpGet("GetCodeDetailByCode")]
-        [ProducesResponseType(typeof(ResultDiscountCouponDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetCodeDetailByCode([FromQuery] string code)
         {
             if (string.IsNullOrWhiteSpace(code))
@@ -64,9 +54,6 @@ namespace Ecommerce.Discount.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CreateDiscountCoupon([FromBody] CreateDiscountCouponDto createCouponDto)
         {
             if (!ModelState.IsValid)
@@ -77,7 +64,6 @@ namespace Ecommerce.Discount.Controllers
 
             await _discountService.CreateDiscountCouponAsync(createCouponDto);
 
-            // Return 201 Created with location to query by code
             if (!string.IsNullOrWhiteSpace(createCouponDto.CouponCode))
             {
                 return CreatedAtAction(nameof(GetCodeDetailByCode), new { code = createCouponDto.CouponCode }, ApiResponse.Ok(ApiMessages.Created));
@@ -88,9 +74,6 @@ namespace Ecommerce.Discount.Controllers
         }
 
         [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteDiscountCoupon(int id)
         {
             await _discountService.DeleteDiscountCouponAsync(id);
@@ -98,10 +81,6 @@ namespace Ecommerce.Discount.Controllers
         }
 
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateDiscountCoupon([FromBody] UpdateDiscountCouponDto updateCouponDto)
         {
             if (!ModelState.IsValid)
@@ -112,6 +91,14 @@ namespace Ecommerce.Discount.Controllers
 
             await _discountService.UpdateDiscountCouponAsync(updateCouponDto);
             return NoContent();
+        }
+
+        [HttpGet("DiscountCouponCount")]
+        public async Task<IActionResult> GetDiscountCouponCount()
+        {
+            var count = await _discountService.GetDiscountCouponCount();
+            
+            return Ok(ApiResponse<int>.Ok(count));
         }
     }
 }
