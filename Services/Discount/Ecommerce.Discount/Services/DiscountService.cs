@@ -82,18 +82,6 @@ namespace Ecommerce.Discount.Services
             }
         }
 
-        //public int GetDiscountCouponRate(string code)
-        //{
-        //    string query = "select Rate from Coupons where Code=@code";
-        //    var parameters = new DynamicParameters();
-        //    parameters.Add("@code", code);
-        //    using (var connection = _context.CreateConnection())
-        //    {
-        //        var values =  connection.Query(query, parameters);
-        //        return int.Parse(values.ToString());
-        //    }
-        //}
-
         public async Task UpdateDiscountCouponAsync(UpdateDiscountCouponDto updateCouponDto)
         {
             string query = "Update Coupons Set CouponCode=@couponCode,CouponRate=@couponRate,IsActive=@isActive,ValidDate=@validDate where CouponId=@couponId";

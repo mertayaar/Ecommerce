@@ -1,4 +1,5 @@
-﻿using Ecommerce.WebUI.Models;
+﻿using Ecommerce.Common;
+using Ecommerce.WebUI.Models;
 using Ecommerce.WebUI.Services.Interfaces;
 
 namespace Ecommerce.WebUI.Services.Concrete
@@ -14,7 +15,8 @@ namespace Ecommerce.WebUI.Services.Concrete
 
         public async Task<UserDetailViewModel?> GetUserInfo()
         {
-           return await _httpClient.GetFromJsonAsync<UserDetailViewModel>("/api/users/getuser");
+            var userInfo = await _httpClient.GetFromJsonAsync<ApiResponse<UserDetailViewModel>>("/api/users/getuser");
+            return userInfo.Data;
         }
     }
 }

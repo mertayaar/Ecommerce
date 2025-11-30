@@ -1,4 +1,5 @@
 ﻿using Ecommerce.DtoLayer.ReviewDtos;
+using Ecommerce.WebUI.Services.ReviewServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -7,15 +8,14 @@ using System.Text;
 namespace Ecommerce.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [AllowAnonymous]
     [Route("Admin/Review")]
     public class ReviewController : Controller
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IReviewService _reviewService;
 
-        public ReviewController(IHttpClientFactory httpClientFactory)
+        public ReviewController(IReviewService reviewService)
         {
-            _httpClientFactory = httpClientFactory;
+            _reviewService = reviewService;
         }
 
         [Route("Index")]
@@ -26,15 +26,9 @@ namespace Ecommerce.WebUI.Areas.Admin.Controllers
             ViewBag.v2 = "Reviews";
             ViewBag.v3 = "Review List";
 
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("http://localhost:7225/api/Reviews");
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultReviewDto>>(jsonData);
-                return View(values);
-            }
-            return View();
+            var reviewList = await _reviewService.GetAllReviewAsync();
+            return View(reviewList);
+
         }
 
 
@@ -43,13 +37,8 @@ namespace Ecommerce.WebUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> DeleteReview(string id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync("http://localhost:7225/api/Reviews?id=" + id);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index", "Review", new { area = "Admin" });
-            }
-            return View();
+            await _reviewService.DeleteReviewAsync(id);
+            return RedirectToAction("Index", "Review", new { area = "Admin" });
         }
 
         [Route("UpdateReview/{id}")]
@@ -60,15 +49,9 @@ namespace Ecommerce.WebUI.Areas.Admin.Controllers
             ViewBag.v1 = "Reviews";
             ViewBag.v2 = "Update Review";
             ViewBag.v3 = "Review Operations";
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("http://localhost:7225/api/Reviews/" + id);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<UpdateReviewDto>(jsonData);
-                return View(values);
-            }
-            return View();
+
+            var review = await _reviewService.GetByIdReviewAsync(id);
+            return View(review);
         }
 
         [Route("UpdateReview/{id}")]
@@ -76,15 +59,8 @@ namespace Ecommerce.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> UpdateReview(UpdateReviewDto updateReviewDto)
         {
             updateReviewDto.Status = true;
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(updateReviewDto);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("http://localhost:7225/api/Reviews/", stringContent);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index", "Review", new { area = "Admin" });
-            }
-            return View();
+            await _reviewService.UpdateReviewAsync(updateReviewDto);
+            return RedirectToAction("Index", "Review", new { area = "Admin" });
         }
 
     }

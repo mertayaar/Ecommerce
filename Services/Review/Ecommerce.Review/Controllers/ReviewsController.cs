@@ -28,7 +28,7 @@ namespace Ecommerce.Review.Controllers
             if (values == null || values.Count == 0)
                 return NoContent();
 
-            return Ok(ApiResponse<object>.Ok(values));
+            return Ok(ApiResponse<List<UserReview>>.Ok(values));
         }
 
         [HttpPost]
@@ -64,7 +64,7 @@ namespace Ecommerce.Review.Controllers
             if (values == null || values.Count == 0)
                 return NoContent();
 
-            return Ok(ApiResponse<object>.Ok(values));
+            return Ok(ApiResponse<List<UserReview>>.Ok(values));
         }
 
 
