@@ -1,0 +1,6 @@
+@Ecommerce.SignalRRealTimeAPi_HostAddress = http://localhost:5165
+
+GET {{Ecommerce.SignalRRealTimeAPi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

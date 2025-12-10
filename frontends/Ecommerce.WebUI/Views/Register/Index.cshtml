@@ -1,4 +1,6 @@
-﻿@model CreateRegisterDto
+﻿@using Ecommerce.WebUI.Services.LocalizationServices
+@model CreateRegisterDto
+@inject ILocalizationService localizer
 @{
     Layout = null;
 }
@@ -8,14 +10,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>Ecommerce Register Page</title>
-	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<!-- Font-->
 	<link rel="stylesheet" type="text/css" href="~/colorlib-regform-30/css/opensans-font.css">
 	<link rel="stylesheet" type="text/css" href="~/colorlib-regform-30/fonts/line-awesome/css/line-awesome.min.css">
-	<!-- Jquery -->
 	<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
-	<!-- Main Style Css -->
 	<link rel="stylesheet" href="~/colorlib-regform-30/css/style.css" />
 </head>
 <body class="form-v4">
@@ -26,48 +24,48 @@
 				<p class="text-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Diam volutpat commodo.</p>
 				<div class="form-left-last">
 					<button type="button" class="account-button" onclick="window.location.href='/Login/Index'">
-						Have An Account
+						@localizer.GetLocalizeString("Have An Account")
 					</button>
 				</div>
 			</div>
 			<form class="form-detail" method="post">
-				<h2>REGISTER FORM</h2>
+				<h2>@localizer.GetLocalizeString("REGISTER FORM")</h2>
 				<div class="form-group">
 					<div class="form-row form-row-1">
-						<label for="first_name">First Name</label>
+						<label for="first_name">@localizer.GetLocalizeString("First Name")</label>
 						<input type="text" asp-for="Name" id="first_name" class="input-text">
 					</div>
 					<div class="form-row form-row-1">
-						<label for="last_name">Last Name</label>
+						<label for="last_name">@localizer.GetLocalizeString("Last Name")</label>
 						<input type="text" asp-for="Surname" id="last_name" class="input-text">
 					</div>
 				</div>
 				<div class="form-row">
-					<label for="your_email">UserName</label>
+					<label for="your_email">@localizer.GetLocalizeString("Username")</label>
 					<input type="text" asp-for="Username" id="your_username" class="input-text">
 				</div>
 				<div class="form-row">
-					<label for="your_email">Your Email</label>
+					<label for="your_email">@localizer.GetLocalizeString("Your Email")</label>
 					<input type="text" asp-for="Email" id="your_email" class="input-text" required pattern="[^@@]+@@[^@@]+.[a-zA-Z]{2,6}">
 				</div>
 				<div class="form-group">
 					<div class="form-row form-row-1 ">
-						<label for="password">Password</label>
+						<label for="password">@localizer.GetLocalizeString("Password")</label>
 						<input type="password" asp-for="Password" id="password" class="input-text" required>
 					</div>
 					<div class="form-row form-row-1">
-						<label for="comfirm-password">Confirm Password</label>
+						<label for="comfirm-password">@localizer.GetLocalizeString("Confirm Password")</label>
 						<input type="password" asp-for="ConfirmPassword" id="comfirm_password" class="input-text" required>
 					</div>
 				</div>
 				<div class="form-checkbox">
-					<label class="container"><p>I agree to the <a href="#" class="text">Terms and Conditions</a></p>
+					<label class="container"><p>@localizer.GetLocalizeString("I agree to the") <a href="#" class="text">@localizer.GetLocalizeString("Terms and Conditions")</a></p>
 					  	<input type="checkbox" name="checkbox">
 					  	<span class="checkmark"></span>
 					</label>
 				</div>
 				<div class="form-row-last">
-					<input type="submit" name="register" class="register" value="Register">
+					<input type="submit" name="register" class="register" value="@localizer.GetLocalizeString("Register")">
 				</div>
 			</form>
 		</div>
@@ -76,7 +74,6 @@
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 	<script>
-		// just for the demos, avoids form submit
 		jQuery.validator.setDefaults({
 		  	debug: true,
 		  	success:  function(label){
@@ -85,30 +82,30 @@
 		});
 		$( "#myform" ).validate({
 		  	rules: {
-			    password: "required",
+				password: @localizer.GetLocalizeString("required"),
 		    	comfirm_password: {
 		      		equalTo: "#password"
 		    	}
 		  	},
 		  	messages: {
 		  		first_name: {
-		  			required: "Please enter a firstname"
+					required: @localizer.GetLocalizeString("Please enter a firstname")
 		  		},
 		  		last_name: {
-		  			required: "Please enter a lastname"
+					required: @localizer.GetLocalizeString("Please enter a lastname")
 		  		},
 		  		your_email: {
-		  			required: "Please provide an email"
+					required: @localizer.GetLocalizeString("Please provide an email")
 		  		},
 		  		password: {
-	  				required: "Please enter a password"
+					required: @localizer.GetLocalizeString("Please enter a password")
 		  		},
 		  		comfirm_password: {
 		  			required: "Please enter a password",
-		      		equalTo: "Wrong Password"
+					equalTo: @localizer.GetLocalizeString("Wrong Password")
 		    	}
 		  	}
 		});
 	</script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</body>
 </html>

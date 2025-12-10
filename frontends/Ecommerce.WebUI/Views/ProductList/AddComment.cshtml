@@ -1,8 +1,9 @@
-﻿<div class="col-md-6">
-    <h4 class="mb-4">Leave a review</h4>
-    <small>Your email address will not be published. Required fields are marked *</small>
+﻿@using Ecommerce.WebUI.Services.LocalizationServices
+@inject ILocalizationService localizer
+<h4 class="mb-4">@localizer.GetLocalizeString("Leave a review")</h4>
+    <small>@localizer.GetLocalizeString("Your email address will not be published. Required fields are marked") *</small>
     <div class="d-flex my-3">
-        <p class="mb-0 mr-2">Your Rating * :</p>
+        <p class="mb-0 mr-2">@localizer.GetLocalizeString("Your Rating") * :</p>
         <div class="text-primary">
             <i class="far fa-star"></i>
             <i class="far fa-star"></i>
@@ -14,19 +15,19 @@
     <form method="post" asp-action="AddComment" asp-controller="ProductList">
        
         <div class="form-group">
-            <label for="name">Your Name *</label>
+            <label for="name">@localizer.GetLocalizeString("Your Name") *</label>
             <input type="text" class="form-control" name="NameSurname">
         </div>
         <div class="form-group">
-            <label for="email">Your Email *</label>
+            <label for="email">@localizer.GetLocalizeString("Your Email") *</label>
             <input type="email" class="form-control"  name="Email">
         </div>
         <div class="form-group">
-            <label for="message">Your Review *</label>
+            <label for="message">@localizer.GetLocalizeString("Your Review") *</label>
             <textarea cols="30" rows="5" class="form-control" name="ReviewDetail"></textarea>
         </div>
         <div class="form-group mb-0">
-            <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
+            <input type="submit" value=@localizer.GetLocalizeString("Leave Your Review") class="btn btn-primary px-3">
         </div>
     </form>
 </div>

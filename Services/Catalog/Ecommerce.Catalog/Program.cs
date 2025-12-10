@@ -15,7 +15,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using Ecommerce.Common;
-using Ecommerce.Catalog.Services.StatisticServices;
 
 
 
@@ -38,7 +37,6 @@ builder.Services.AddScoped<IOfferDiscountService, OfferDiscountService>();
 builder.Services.AddScoped<ISponsorBrandService, SponsorBrandService>();
 builder.Services.AddScoped<IAboutService, AboutService>();
 builder.Services.AddScoped<IContactService, ContactService>();
-builder.Services.AddScoped<IStatisticService, StatisticService>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

@@ -25,5 +25,12 @@ namespace Ecommerce.WebUI.Services.MessageServices
             var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<List<ResultOutboxMessageDto>>>();
             return values.Data;
         }
+
+        public async Task<int> GetTotalMessageCountByReceiverId(string id)
+        {
+            var responseMessage = await _httpClient.GetAsync($"usermessage/TotalMessageCountByReceiverId/{id}");
+            var values = await responseMessage.Content.ReadFromJsonAsync<ApiResponse<int>>();
+            return values.Data;
+        }
     }
 }

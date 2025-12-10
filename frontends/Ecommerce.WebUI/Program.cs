@@ -1,4 +1,5 @@
 using Ecommerce.WebUI.Handlers;
+using Ecommerce.WebUI.Resources;
 using Ecommerce.WebUI.Services.CargoServices.CargoCompanyServices;
 using Ecommerce.WebUI.Services.CargoServices.CargoCustomerServices;
 using Ecommerce.WebUI.Services.CartServices;
@@ -16,6 +17,7 @@ using Ecommerce.WebUI.Services.CatalogServices.SponsorBrandServices;
 using Ecommerce.WebUI.Services.Concrete;
 using Ecommerce.WebUI.Services.DiscountServices;
 using Ecommerce.WebUI.Services.Interfaces;
+using Ecommerce.WebUI.Services.LocalizationServices;
 using Ecommerce.WebUI.Services.MessageServices;
 using Ecommerce.WebUI.Services.OrderServices.OrderAddressServices;
 using Ecommerce.WebUI.Services.OrderServices.OrderOrderingServices;
@@ -29,6 +31,10 @@ using Ecommerce.WebUI.Services.UserIdentityServices;
 using Ecommerce.WebUI.Settings;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
+using System.Globalization;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +66,40 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddLocalization(opt => { opt.ResourcesPath = "Resources"; });
+
+builder.Services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization(opt =>
+{
+    opt.DataAnnotationLocalizerProvider = (type, factory) =>
+    {
+        var assemblyName = new AssemblyName(typeof(AppResource).Assembly.FullName!);
+        return factory.Create("AppResource", assemblyName.Name!);
+    };
+});
+
+builder.Services.Configure<RequestLocalizationOptions>(opt =>
+{
+    var cultures = new List<CultureInfo>
+    {
+        new CultureInfo("en-US"),
+        new CultureInfo("tr-TR"),
+        new CultureInfo("fr-FR"),
+        new CultureInfo("es-ES"),
+        new CultureInfo("de-DE")
+    };
+    opt.DefaultRequestCulture = new RequestCulture("en-US");
+    opt.SupportedCultures = cultures;
+    opt.SupportedUICultures = cultures;
+
+    opt.RequestCultureProviders = new List<IRequestCultureProvider>
+    {
+        new QueryStringRequestCultureProvider(),
+        new CookieRequestCultureProvider(),
+        new AcceptLanguageHeaderRequestCultureProvider()
+    };
+});
+
+builder.Services.AddScoped<ILocalizationService, LocalizationService>();
 
 
 builder.Services.AddScoped<ILoginService, LoginService>();
@@ -109,6 +149,7 @@ builder.Services.AddHttpClient<IReviewService, ReviewService>(opt =>
 {
     opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Review.Path}/");
 }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
 
 builder.Services.AddHttpClient<ICatalogStatisticService, CatalogStatisticService>(opt =>
 {
@@ -228,9 +269,11 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+app.UseRequestLocalization();
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
