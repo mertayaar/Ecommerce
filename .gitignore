@@ -138,3 +138,7 @@ Thumbs.db
 /frontends/Ecommerce.WebUI/Views/Test/Test.cshtml
 **/Properties/launchSettings.json
 /frontends/Ecommerce.WebUI/wwwroot/spica
+/Services/Images/Ecommerce.Images.WebUI
+/Services/RabbitMQMessage/Ecommerce.RabbitMQMessageApi
+/RapidApi/Ecommerce.RapidApiWebUI
+/frontends/Ecommerce.WebUI/Areas/Admin/Controllers/TestController.cs
