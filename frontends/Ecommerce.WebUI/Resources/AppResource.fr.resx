@@ -117,41 +117,83 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Have An Account" xml:space="preserve">
-    <value>Avoir un compte</value>
+  <data name="Address Line 1" xml:space="preserve">
+    <value>Adresse Ligne 1</value>
   </data>
-  <data name="REGISTER FORM" xml:space="preserve">
-    <value>FORMULAIRE D'INSCRIPTION</value>
+  <data name="Address Line 2" xml:space="preserve">
+    <value>Ligne d'adresse 2</value>
   </data>
-  <data name="First Name" xml:space="preserve">
-    <value>Prénom</value>
+  <data name="Apply" xml:space="preserve">
+    <value>Appliquer</value>
   </data>
-  <data name="Last Name" xml:space="preserve">
-    <value>Nom de famille</value>
+  <data name="Bank Transfer" xml:space="preserve">
+    <value>Virement bancaire</value>
   </data>
-  <data name="Username" xml:space="preserve">
-    <value>Nom d'utilisateur</value>
+  <data name="Cart" xml:space="preserve">
+    <value>Panier</value>
   </data>
-  <data name="Your Email" xml:space="preserve">
-    <value>Votre e-mail</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Mot de passe</value>
+  <data name="City" xml:space="preserve">
+    <value>Ville</value>
   </data>
   <data name="Confirm Password" xml:space="preserve">
     <value>Confirmez le mot de passe</value>
   </data>
+  <data name="Country" xml:space="preserve">
+    <value>Pays</value>
+  </data>
+  <data name="Coupon" xml:space="preserve">
+    <value>Coupon</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Direct Check" xml:space="preserve">
+    <value>Vérification directe</value>
+  </data>
+  <data name="E-mail" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="First Name" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="Have An Account" xml:space="preserve">
+    <value>Avoir un compte</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Bonjour</value>
+  </data>
   <data name="I agree to the" xml:space="preserve">
     <value>J'accepte le</value>
   </data>
-  <data name="Terms and Conditions" xml:space="preserve">
-    <value>Termes et conditions</value>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
   </data>
-  <data name="Register" xml:space="preserve">
-    <value>Registre</value>
+  <data name="Last Name" xml:space="preserve">
+    <value>Nom de famille</value>
   </data>
-  <data name="required" xml:space="preserve">
-    <value>requis</value>
+  <data name="Leave a review" xml:space="preserve">
+    <value>Laisser un avis</value>
+  </data>
+  <data name="Leave Your Review" xml:space="preserve">
+    <value>Laissez votre avis</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Order Total" xml:space="preserve">
+    <value>Total de la commande</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="Payment" xml:space="preserve">
+    <value>Paiement</value>
+  </data>
+  <data name="Phone Number" xml:space="preserve">
+    <value>Numéro de téléphone</value>
+  </data>
+  <data name="Place Order" xml:space="preserve">
+    <value>Passer la commande</value>
   </data>
   <data name="Please enter a firstname" xml:space="preserve">
     <value>Veuillez saisir un prénom</value>
@@ -159,115 +201,73 @@
   <data name="Please enter a lastname" xml:space="preserve">
     <value>Veuillez entrer un nom de famille</value>
   </data>
-  <data name="Please provide an email" xml:space="preserve">
-    <value>Veuillez fournir un e-mail</value>
-  </data>
   <data name="Please enter a password" xml:space="preserve">
     <value>Veuillez entrer un mot de passe</value>
-  </data>
-  <data name="Wrong Password" xml:space="preserve">
-    <value>Mauvais mot de passe</value>
-  </data>
-  <data name="Your Name" xml:space="preserve">
-    <value>Votre nom</value>
-  </data>
-  <data name="Your Review" xml:space="preserve">
-    <value>Votre avis</value>
-  </data>
-  <data name="Leave Your Review" xml:space="preserve">
-    <value>Laissez votre avis</value>
-  </data>
-  <data name="Leave a review" xml:space="preserve">
-    <value>Laisser un avis</value>
-  </data>
-  <data name="Your email address will not be published. Required fields are marked" xml:space="preserve">
-    <value>Votre adresse email ne sera pas publiée. Les champs obligatoires sont marqués</value>
-  </data>
-  <data name="Your Rating" xml:space="preserve">
-    <value>Votre note</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="Information" xml:space="preserve">
-    <value>Information</value>
-  </data>
-  <data name="Reviews" xml:space="preserve">
-    <value>Avis</value>
-  </data>
-  <data name="E-mail" xml:space="preserve">
-    <value>E-mail</value>
-  </data>
-  <data name="Phone Number" xml:space="preserve">
-    <value>Numéro de téléphone</value>
-  </data>
-  <data name="Address Line 1" xml:space="preserve">
-    <value>Adresse Ligne 1</value>
-  </data>
-  <data name="Address Line 2" xml:space="preserve">
-    <value>Ligne d'adresse 2</value>
-  </data>
-  <data name="Country" xml:space="preserve">
-    <value>Pays</value>
-  </data>
-  <data name="City" xml:space="preserve">
-    <value>Ville</value>
-  </data>
-  <data name="Payment" xml:space="preserve">
-    <value>Paiement</value>
-  </data>
-  <data name="Order Total" xml:space="preserve">
-    <value>Total de la commande</value>
-  </data>
-  <data name="Direct Check" xml:space="preserve">
-    <value>Vérification directe</value>
-  </data>
-  <data name="Bank Transfer" xml:space="preserve">
-    <value>Virement bancaire</value>
-  </data>
-  <data name="Place Order" xml:space="preserve">
-    <value>Passer la commande</value>
-  </data>
-  <data name="Please enter your email" xml:space="preserve">
-    <value>Veuillez entrer votre email</value>
-  </data>
-  <data name="Please enter your name" xml:space="preserve">
-    <value>Veuillez entrer votre nom</value>
-  </data>
-  <data name="Subject" xml:space="preserve">
-    <value>Sujet</value>
   </data>
   <data name="Please enter a subject" xml:space="preserve">
     <value>Veuillez entrer un sujet</value>
   </data>
-  <data name="Message" xml:space="preserve">
-    <value>Message</value>
+  <data name="Please enter your email" xml:space="preserve">
+    <value>Veuillez entrer votre email</value>
   </data>
   <data name="Please enter your message" xml:space="preserve">
     <value>Veuillez entrer votre message</value>
   </data>
-  <data name="Send Message" xml:space="preserve">
-    <value>Envoyer un message</value>
+  <data name="Please enter your name" xml:space="preserve">
+    <value>Veuillez entrer votre nom</value>
   </data>
-  <data name="Hello" xml:space="preserve">
-    <value>Bonjour</value>
-  </data>
-  <data name="Recent" xml:space="preserve">
-    <value>Récent</value>
+  <data name="Please provide an email" xml:space="preserve">
+    <value>Veuillez fournir un e-mail</value>
   </data>
   <data name="Products" xml:space="preserve">
     <value>Produits</value>
   </data>
-  <data name="Apply" xml:space="preserve">
-    <value>Appliquer</value>
+  <data name="Recent" xml:space="preserve">
+    <value>Récent</value>
   </data>
-  <data name="Coupon" xml:space="preserve">
-    <value>Coupon</value>
+  <data name="Register" xml:space="preserve">
+    <value>Registre</value>
   </data>
-  <data name="Cart" xml:space="preserve">
-    <value>Panier</value>
+  <data name="REGISTER FORM" xml:space="preserve">
+    <value>FORMULAIRE D'INSCRIPTION</value>
+  </data>
+  <data name="required" xml:space="preserve">
+    <value>requis</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Avis</value>
+  </data>
+  <data name="Send Message" xml:space="preserve">
+    <value>Envoyer un message</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Sujet</value>
   </data>
   <data name="Summary" xml:space="preserve">
     <value>Résumé</value>
+  </data>
+  <data name="Terms and Conditions" xml:space="preserve">
+    <value>Termes et conditions</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
+  </data>
+  <data name="Wrong Password" xml:space="preserve">
+    <value>Mauvais mot de passe</value>
+  </data>
+  <data name="Your Email" xml:space="preserve">
+    <value>Votre e-mail</value>
+  </data>
+  <data name="Your email address will not be published. Required fields are marked" xml:space="preserve">
+    <value>Votre adresse email ne sera pas publiée. Les champs obligatoires sont marqués</value>
+  </data>
+  <data name="Your Name" xml:space="preserve">
+    <value>Votre nom</value>
+  </data>
+  <data name="Your Rating" xml:space="preserve">
+    <value>Votre note</value>
+  </data>
+  <data name="Your Review" xml:space="preserve">
+    <value>Votre avis</value>
   </data>
 </root>

@@ -4,8 +4,8 @@
 @using Microsoft.Extensions.Options
 @using Ecommerce.WebUI.Resources
 
-@inject IOptions<RequestLocalizationOptions> _locOptions;
-@inject IHtmlLocalizer<AppResource> _localize;
+@inject IOptions<RequestLocalizationOptions> _locOptions
+@inject IHtmlLocalizer<AppResource> _localize
 
 @{
     var requestCulture = Context.Features.Get<IRequestCultureFeature>();
@@ -21,7 +21,7 @@
         Text = "-- Select a language --",
     });
 }
-}
+
 
 <form asp-controller="Culture" asp-action="SetLanguage" asp-route-returnUrl="@Context.Request.Path" method="post">
     <select name="culture" asp-items="cultureItems" class="form-select form-select-sm" onchange="this.form.submit()">

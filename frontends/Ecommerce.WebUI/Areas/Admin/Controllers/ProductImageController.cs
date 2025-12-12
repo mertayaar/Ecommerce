@@ -7,7 +7,6 @@ using System.Text;
 namespace Ecommerce.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [AllowAnonymous]
     [Route("Admin/ProductImage")]
     public class ProductImageController : Controller
     {
@@ -27,7 +26,7 @@ namespace Ecommerce.WebUI.Areas.Admin.Controllers
             ViewBag.v2 = "Update ProductImage";
             ViewBag.v3 = "ProductImage Operations";
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7220/api/ProductImages/ProductImagesByProductId?id=" + id);
+            var responseMessage = await client.GetAsync("http://localhost:7220/api/ProductImages/ProductImagesByProductId?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();

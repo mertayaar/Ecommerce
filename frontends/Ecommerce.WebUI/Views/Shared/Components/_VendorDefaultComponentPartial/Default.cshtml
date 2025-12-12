@@ -5,8 +5,8 @@
             <div class="owl-carousel vendor-carousel">
                 @foreach(var item in Model)
                 {
-                    <div class="bg-light p-4" style="width:150px; height:120px;">
-                        <img src="@item.ImageUrl">
+                    <div class="item bg-light p-4">
+                        <img class="img-fluid" alt="" src="@item.ImageUrl" style="max-height:100px;">
                     </div>
                 }
                

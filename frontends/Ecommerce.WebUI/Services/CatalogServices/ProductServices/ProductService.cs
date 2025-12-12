@@ -40,7 +40,7 @@ namespace Ecommerce.WebUI.Services.CatalogServices.ProductServices
 
         public async Task<List<ResultProductsWithCategoryDto>> GetProductsWithCategoryAsync()
         {
-            var responseMessage = await _httpClient.GetAsync("products");
+            var responseMessage = await _httpClient.GetAsync("products/ProductListWithCategory");
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<ApiResponse<List<ResultProductsWithCategoryDto>>>(jsonData);
             return values.Data;
