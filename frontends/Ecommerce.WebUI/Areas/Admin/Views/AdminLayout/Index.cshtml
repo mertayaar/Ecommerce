@@ -14,23 +14,16 @@
 
             @await Component.InvokeAsync("_AdminLayoutHeaderComponentPartial")
 
-            <!-- Main Header -->
-            <!-- Left side column. contains the logo and sidebar -->
             @await Component.InvokeAsync("_AdminLayoutSidebarComponentPartial")
 
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
                 @await Component.InvokeAsync("_AdminLayoutMainSectionViewBagComponentPartial")
 
-
-                <!-- Main content -->
               @RenderBody()
-                <!-- content -->
+
             </div>
-            <!-- content-wrapper -->
-            <!-- Main Footer -->
             <footer class="main-footer dark-bg">
                 <div class="pull-right hidden-xs"> Version 1.0</div>
                 Copyright &copy; @DateTime.Now.Year Ecommerce Micro Service. All rights reserved.

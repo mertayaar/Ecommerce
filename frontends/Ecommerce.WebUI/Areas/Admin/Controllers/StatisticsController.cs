@@ -26,9 +26,9 @@ namespace Ecommerce.WebUI.Areas.Admin.Controllers
             _discountStatisticService = discountStatisticService;
             _messageStatisticService = messageStatisticService;
         }
+
         [HttpGet]
         [Route("Index")]
-
         public async Task<IActionResult> Index()
         {
             var brandCount = await _catalogStatisticService.GetSponsorBrandCount();
